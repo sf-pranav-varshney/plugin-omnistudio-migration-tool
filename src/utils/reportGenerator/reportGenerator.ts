@@ -1,9 +1,11 @@
+import { Filter, ReportHeader, TableColumn, TableHeaderCell } from "./reportInterfaces";
+
 export function generateHtmlTable<T>(
-  headerRows: TableHeaderCell[][],
+  headerRows: TableHeaderCell[][], 
   columns: TableColumn<T>[],
   rows: T[],
-  reportHeader: Record<string, string>[],
-  filters: { label: string; key: string; filterOptions: string[] }[] = [],
+  reportHeader: ReportHeader[],
+  filters: Filter[] = [],
   tableClass = 'slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered',
   ariaLabel = ''
 ): string {
@@ -19,7 +21,7 @@ export function generateHtmlTable<T>(
               <th
                 ${cell.colspan ? `colspan="${cell.colspan}"` : ''}
                 ${cell.rowspan ? `rowspan="${cell.rowspan}"` : ''}
-                style="width:${cell.width || 'auto'}"
+                style="width:${cell?.width || 'auto'}"
               >
                 <div class="filter-header">
                   <span class="filter-label">${cell.label}</span>
