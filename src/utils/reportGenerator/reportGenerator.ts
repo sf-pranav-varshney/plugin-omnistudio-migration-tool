@@ -32,8 +32,8 @@ export function generateHtmlTable<T>(
             .join('')}
         </tr>
       `
-        )
-        .join('')}
+    )
+    .join('')}
     </thead>
   `;
 
@@ -91,14 +91,10 @@ export function generateHtmlTable<T>(
               />
               ${option}
             </label>
-          `
-            )
-            .join('')}
+          `).join('')}
         </div>
       </div>
-    `
-      )
-      .join('')}
+    `).join('')}
   </div>
 </div>`;
 
@@ -120,12 +116,9 @@ export function generateHtmlTable<T>(
               const cellContent: string = col.cell(row);
               const dataAttr: string = ['name', 'oldName'].includes(key) ? `data-name="${value.toLowerCase()}"` : '';
               return `<td ${dataAttr} title="${title}" key="${key}" value="${value}">${cellContent}</td>`;
-            })
-            .join('')}
+            }).join('')}
         </tr>
-      `
-        )
-        .join('')}
+      `).join('')}
         <tr id="no-rows-message" style="display: none;">
           <td colspan="100%" style="text-align: center; padding: 16px; color: #666;">
             No matching records found.
@@ -144,8 +137,7 @@ export function generateHtmlTable<T>(
           <div class="label-value">${header.value}</div>
         </div>
       `
-        )
-        .join('')}
+        ).join('')}
     </div>
   `;
 
