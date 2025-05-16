@@ -1,8 +1,8 @@
-import { Filter, ReportHeader, TableColumn, TableHeaderCell } from "./reportInterfaces";
+import { Filter, ReportHeader, TableColumn, TableHeaderCell } from './reportInterfaces';
 
 export function generateHtmlTable<T>(
-  headerRows: TableHeaderCell[][], 
-  columns: TableColumn<T>[],
+  headerRows: TableHeaderCell[][],
+  columns: Array<TableColumn<T>>,
   rows: T[],
   reportHeader: ReportHeader[],
   filters: Filter[] = [],
@@ -13,11 +13,11 @@ export function generateHtmlTable<T>(
     <thead>
       ${headerRows
         .map(
-          row => `
+          (row) => `
         <tr>
           ${row
             .map(
-              cell => `
+              (cell) => `
               <th
                 ${cell.colspan ? `colspan="${cell.colspan}"` : ''}
                 ${cell.rowspan ? `rowspan="${cell.rowspan}"` : ''}
@@ -32,8 +32,8 @@ export function generateHtmlTable<T>(
             .join('')}
         </tr>
       `
-        )
-        .join('')}
+    )
+    .join('')}
     </thead>
   `;
 
@@ -73,13 +73,13 @@ export function generateHtmlTable<T>(
   <div id="filter-dropdown" class="filter-dropdown">
     ${filters
       .map(
-        filter => `
+        (filter) => `
       <div class="filter-group">
         <div class="filter-group-label">Filter by ${filter.label}</div>
         <div class="filter-options">
           ${filter.filterOptions
             .map(
-              option => `
+              (option) => `
             <label>
               <input
                 type="checkbox"
@@ -91,41 +91,30 @@ export function generateHtmlTable<T>(
               />
               ${option}
             </label>
-          `
-            )
-            .join('')}
+          `).join('')}
         </div>
       </div>
-    `
-      )
-      .join('')}
+    `).join('')}
   </div>
-</div>
-  `
+</div>`;
 
   const tbody = `
     <tbody id="filterable-table-body">
       ${rows
         .map(
-          row => `
+          (row) => `
         <tr>
           ${columns
-            .map(col => {
-              const key = col.key;
-              const title = col.title ? col.title(row) : '';
-              const value = col.filterValue(row).toString();
-              const cellContent = col.cell(row);
-              const dataAttr = ['name', 'oldName'].includes(key)
-                ? `data-name="${value.toLowerCase()}"`
-                : '';
-
+            .map((col) => {
+              const key: string= col.key;
+              const title: string= col.title ? col.title(row) : '';
+              const value: string= col.filterValue(row).toString();
+              const cellContent: string = col.cell(row);
+              const dataAttr: string = ['name', 'oldName'].includes(key) ? `data-name="${value.toLowerCase()}"` : '';
               return `<td ${dataAttr} title="${title}" key="${key}" value="${value}">${cellContent}</td>`;
-            })
-            .join('')}
+            }).join('')}
         </tr>
-      `
-        )
-        .join('')}
+      `).join('')}
         <tr id="no-rows-message" style="display: none;">
           <td colspan="100%" style="text-align: center; padding: 16px; color: #666;">
             No matching records found.
@@ -138,14 +127,13 @@ export function generateHtmlTable<T>(
     <div class="header-container">
       ${reportHeader
         .map(
-          header => `
+          (header) => `
         <div class="org-details-section">
           <div class="label-key">${header.key}</div>
           <div class="label-value">${header.value}</div>
         </div>
       `
-        )
-        .join('')}
+        ).join('')}
     </div>
   `;
 
