@@ -167,8 +167,8 @@ export function generateHtmlTable<T>(
         ${thead}
         ${tbody}
       </table>
-      <script src="reportGeneratorUtility.js" defer></script>
-      <link rel="stylesheet" href="reportGenerator.css">
+      <script src="./reportGeneratorUtility.js" defer></script>
+      <link rel="stylesheet" href="./reportGenerator.css">
     </div>
   `;
 }
