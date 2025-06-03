@@ -3,13 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import open from 'open';
-import {
-  ApexAssessmentInfo,
-  AssessmentInfo,
-  LWCAssessmentInfo,
-  FlexCardAssessmentInfo,
-  nameLocation,
-} from '../interfaces';
+import { ApexAssessmentInfo, AssessmentInfo, LWCAssessmentInfo, nameLocation } from '../interfaces';
 import { ReportHeaderFormat } from '../reportGenerator/reportInterfaces';
 import { OmnistudioOrgDetails } from '../orgUtils';
 import { OSAssessmentReporter } from './OSAssessmentReporter';
@@ -298,37 +292,6 @@ export class AssessmentReporter {
         </html>
         `;
     return document;
-  }
-
-  private static getCardAssessmentReport(tableContent: string): string {
-    const tableBody = `
-        <div style="margin-block:15px">        
-            <table style="width: 100%; table-layout: auto;" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered" aria-label="Results for Flexcards updates">
-            <thead>
-                <tr class="slds-line-height_reset">
-                    <th class="" scope="col" style="width: 20%; word-wrap: break-word; white-space: normal; text-align: left;">
-                        <div class="slds-truncate" title="Name">Name</div>
-                    </th>
-                    <th class="" scope="col" style="width: 10%; word-wrap: break-word; white-space: normal; text-align: left;">
-                        <div class="slds-truncate" title="ID">ID</div>
-                    </th>
-                    <th class="" scope="col" style="width: 20%; word-wrap: break-word; white-space: normal; text-align: left;">
-                        <div title="Dependencies">Omniscript Dependencies</div>
-                    </th>
-                    <th class="" scope="col" style="width: 20%; word-wrap: break-word; white-space: normal; text-align: left;">
-                        <div title="Dependencies">Integration Procedures Dependencies</div>
-                    </th>
-                    <th class="" scope="col" style="width: 20%; word-wrap: break-word; white-space: normal; text-align: left;">
-                        <div title="Dependencies">Data Mapper Dependencies</div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            ${tableContent}
-            </tbody>
-            </table>
-        </div>`;
-    return tableBody;
   }
 
   private static getLWCAssesmentReport(tableContent: string): string {

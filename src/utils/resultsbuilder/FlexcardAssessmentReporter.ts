@@ -45,23 +45,11 @@ export class FlexcardAssessmentReporter {
         label: 'Data Mapper dependencies',
         rowspan: 2,
         subColumn: [],
-      }
+      },
     ];
 
     // Define columns
     const columns: Array<TableColumn<FlexCardAssessmentInfo>> = [
-      {
-        key: 'oldName',
-        cell: (row: FlexCardAssessmentInfo): string => row.name,
-        filterValue: (row: FlexCardAssessmentInfo): string => row.name,
-        title: (row: FlexCardAssessmentInfo): string => row.name,
-      },
-      {
-        key: 'id',
-        cell: (row: FlexCardAssessmentInfo): string => (row.id ? `<a href="${instanceUrl}/${row.id}">${row.id}</a>` : ''),
-        filterValue: (row: FlexCardAssessmentInfo): string => row.id,
-        title: (row: FlexCardAssessmentInfo): string => row.id,
-      },
       {
         key: 'name',
         cell: (row: FlexCardAssessmentInfo): string => row.name || '',
@@ -69,18 +57,25 @@ export class FlexcardAssessmentReporter {
         title: (row: FlexCardAssessmentInfo): string => row.name,
       },
       {
+        key: 'id',
+        cell: (row: FlexCardAssessmentInfo): string =>
+          row.id ? `<a href="${instanceUrl}/${row.id}">${row.id}</a>` : '',
+        filterValue: (row: FlexCardAssessmentInfo): string => row.id,
+        title: (row: FlexCardAssessmentInfo): string => row.id,
+      },
+      {
         key: 'dependenciesOS',
-        cell: (row: FlexCardAssessmentInfo): string => row.dependenciesOS.join(', ') || '',
+        cell: (row: FlexCardAssessmentInfo): string => (row.dependenciesOS ? row.dependenciesOS.join(', ') : ''),
         filterValue: (row: FlexCardAssessmentInfo): string => (row.dependenciesOS ? row.dependenciesOS.join(', ') : ''),
       },
       {
         key: 'dependenciesIP',
-        cell: (row: FlexCardAssessmentInfo): string => row.dependenciesIP.join(', ') || '',
+        cell: (row: FlexCardAssessmentInfo): string => (row.dependenciesIP ? row.dependenciesIP.join(', ') : ''),
         filterValue: (row: FlexCardAssessmentInfo): string => (row.dependenciesIP ? row.dependenciesIP.join(', ') : ''),
       },
       {
         key: 'dependenciesDR',
-        cell: (row: FlexCardAssessmentInfo): string => row.dependenciesDR.join(', ') || '',
+        cell: (row: FlexCardAssessmentInfo): string => (row.dependenciesDR ? row.dependenciesDR.join(', ') : ''),
         filterValue: (row: FlexCardAssessmentInfo): string => (row.dependenciesDR ? row.dependenciesDR.join(', ') : ''),
       },
     ];
