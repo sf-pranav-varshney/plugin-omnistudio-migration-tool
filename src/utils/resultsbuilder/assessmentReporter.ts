@@ -15,6 +15,7 @@ import { OmnistudioOrgDetails } from '../orgUtils';
 import { OSAssessmentReporter } from './OSAssessmentReporter';
 import { IPAssessmentReporter } from './IPAssessmentReporter';
 import { DRAssessmentReporter } from './DRAssessmentReporter';
+import { FlexcardAssessmentReporter } from './FlexcardAssessmentReporter';
 
 export class AssessmentReporter {
   public static async generate(
@@ -38,7 +39,7 @@ export class AssessmentReporter {
     );
     this.createDocument(
       flexcardAssessmentFilePath,
-      this.generateCardAssesment(result.flexCardAssessmentInfos, instanceUrl)
+      FlexcardAssessmentReporter.generateFlexcardAssesment(result.flexCardAssessmentInfos, instanceUrl, orgDetails)
     );
     this.createDocument(
       integrationProcedureAssessmentFilePath,
@@ -271,34 +272,6 @@ export class AssessmentReporter {
         </table>
       </div>`;
     return tableBody;
-  }
-
-  private static generateCardAssesment(flexCardAssessmentInfos: FlexCardAssessmentInfo[], instanceUrl: string): string {
-    let tableBody = '';
-    tableBody += '<div class="slds-text-heading_large">Flexcard Components Assessment</div>';
-    for (const card of flexCardAssessmentInfos) {
-      const row = `
-              <tr class="slds-hint_parent">
-                  <td style="word-wrap: break-word; white-space: normal; max-width: 200px;">
-                      <div class="slds-truncate" title="${card.name}">${card.name}</div>
-                  </td>
-                  <td style="word-wrap: break-word; white-space: normal; max-width: 100px;">
-                      <div class="slds-truncate" title="${card.id}"><a href="${instanceUrl}/${card.id}">${card.id}</div>
-                  </td>
-                  <td style="word-wrap: break-word; white-space: normal; max-width: 60%; overflow: hidden;">
-                      <div title="${card.dependenciesOS}">${card.dependenciesOS}</div>
-                  </td>
-                  <td style="word-wrap: break-word; white-space: normal; max-width: 60%; overflow: hidden;">
-                      <div title="${card.dependenciesIP}">${card.dependenciesIP}</div>
-                  </td>
-                  <td style="word-wrap: break-word; white-space: normal; max-width: 60%; overflow: hidden;">
-                      <div title="${card.dependenciesDR}">${card.dependenciesDR}</div>
-                  </td>
-              </tr>`;
-      tableBody += row;
-    }
-
-    return this.getCardAssessmentReport(tableBody);
   }
 
   private static generateMessages(messages: string[]): string {
