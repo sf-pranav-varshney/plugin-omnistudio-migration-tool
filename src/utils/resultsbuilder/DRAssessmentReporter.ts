@@ -117,9 +117,10 @@ export class DRAssessmentReporter {
       dataRaptorAssessmentInfos,
       org,
       filters,
+      [],
       undefined,
       'Data Mapper Assessment'
     );
-    return `<div class="slds-text-heading_large">Data Mapper Assessment Report</div>${tableHtml}`;
+    return `${tableHtml}`;
   }
 }

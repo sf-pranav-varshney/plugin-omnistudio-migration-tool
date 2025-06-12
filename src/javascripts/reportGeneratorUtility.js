@@ -97,6 +97,24 @@ function filterAndSearchTable() {
   }`;
 }
 
+function toggleCtaSummaryPanel() {
+        const panel = document.getElementById('cta-summary-panel');
+        const main = document.getElementById('main-panel');
+        const wrapper = document.getElementById('scrollable-wrapper');
+
+        const isVisible = panel.classList.contains('visible');
+        panel.classList.toggle('visible');
+        main.classList.toggle('shrunk');
+
+        // Ensure smooth scroll into view when opened
+        if (!isVisible) {
+          setTimeout(() => {
+            wrapper.scrollLeft = wrapper.scrollWidth;
+          }, 200); // wait for transition
+        }
+      }
+
 // Expose globally so HTML inline event handlers can access them
 window.toggleFilterDropdown = toggleFilterDropdown;
 window.filterAndSearchTable = filterAndSearchTable;
+window.toggleCtaSummaryPanel = toggleCtaSummaryPanel;

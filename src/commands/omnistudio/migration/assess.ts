@@ -45,24 +45,28 @@ export default class Assess extends OmniStudioBaseCommand {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async run(): Promise<any> {
     DebugTimer.getInstance().start();
-    const namespace = (this.flags.namespace || 'vlocity_ins') as string;
     const apiVersion = (this.flags.apiversion || '55.0') as string;
     const allVersions = (this.flags.allversions || false) as boolean;
     const assessOnly = (this.flags.only || '') as string;
     const relatedObjects = (this.flags.relatedobjects || '') as string;
     const conn = this.org.getConnection();
-    const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, namespace);
+    const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, this.flags.namespace);
 
-    if (orgs.packageDetails.length === 0) {
-      this.ux.log('No package installed on given org.');
+    if (!orgs.hasValidNamespace) {
+      this.ux.warn('The namespace you have passed is not valid namespace, the valid namespace of your org is ' + orgs.packageDetails.namespace)
+    }
+    
+    if (!orgs.packageDetails) {
+      this.ux.error('No package installed on given org.');
       return;
     }
 
     if (orgs.omniStudioOrgPermissionEnabled) {
-      this.ux.log('The org is already on standard data model.');
+      this.ux.error('The org is already on standard data model.');
       return;
     }
 
+    const namespace = orgs.packageDetails.namespace;
     Logger.initialiseLogger(this.ux, this.logger);
     conn.setApiVersion(apiVersion);
 

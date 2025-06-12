@@ -1,6 +1,6 @@
 import { OSAssessmentInfo } from '../interfaces';
 import { generateHtmlTable } from '../reportGenerator/reportGenerator';
-import { Filter, HeaderColumn, ReportHeaderFormat, TableColumn } from '../reportGenerator/reportInterfaces';
+import { CTASummary, Filter, HeaderColumn, ReportHeaderFormat, TableColumn } from '../reportGenerator/reportInterfaces';
 import { reportingHelper } from './reportingHelper';
 
 export class OSAssessmentReporter {
@@ -87,6 +87,7 @@ export class OSAssessmentReporter {
         cell: (row: OSAssessmentInfo): string => row.oldName,
         filterValue: (row: OSAssessmentInfo): string => row.oldName,
         title: (row: OSAssessmentInfo): string => row.oldName,
+        icon: (row: OSAssessmentInfo): string => this.getIconOnRow(row.migrationStatus),
       },
       {
         key: 'id',
@@ -154,6 +155,17 @@ export class OSAssessmentReporter {
         key: 'assessmentStatus',
       },
     ];
+
+    const ctaSummary: CTASummary[] = [{
+      name: 'Angular Omniscripts',
+      message: 'converts to LWC omniscripts',
+      link: 'https://google.com'
+    }, {
+      name: 'Duplicate Name',
+      message: 'rename the OS prior to running migration',
+      link: 'https://google.com'
+    }];
+
     // Render table
     const tableHtml = generateHtmlTable(
       headerColumn,
@@ -161,13 +173,21 @@ export class OSAssessmentReporter {
       osAssessmentInfos,
       org,
       filters,
+      ctaSummary,
       undefined,
-      'OmniScript Assessment'
+      'Omniscript Assessment'
     );
-    return `<div class="slds-text-heading_large">Omniscript Assessment Report</div>${tableHtml}`;
+    return `${tableHtml}`;
   }
 
   private static getMigrationStatusStyles(assessmentStatus: string): string {
     return assessmentStatus === 'Can be Automated' ? 'color:green; font-weight:500;' : 'color:red; font-weight:500;';
+  }
+
+  private static getIconOnRow(assessmentStatus: string): string {
+    return assessmentStatus === 'Need Manual Intervention' ? `<span class='row-'><svg width="16" height="16" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="red" stroke-width="10" fill="none"/>
+      <line x1="25" y1="75" x2="75" y2="25" stroke="red" stroke-width="10"/>
+    </svg></span>` : ``;
   }
 }

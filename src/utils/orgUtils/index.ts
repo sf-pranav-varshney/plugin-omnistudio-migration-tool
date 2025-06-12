@@ -16,10 +16,11 @@ interface OrgDetails {
 }
 
 export interface OmnistudioOrgDetails {
-  packageDetails: PackageDetail[];
+  packageDetails: PackageDetail;
   omniStudioOrgPermissionEnabled: boolean;
   orgDetails: OrgDetails;
   dataModel: string;
+  hasValidNamespace: boolean;
 }
 
 export interface PackageDetail {
@@ -282,9 +283,7 @@ export class OrgUtils {
    * @param connection - Salesforce connection object
    * @returns Promise resolving to an array of PackageDetail objects
    */
-  public static async getOrgDetails(connection: Connection, namespace: string): Promise<OmnistudioOrgDetails> {
-    //Execute apex rest resource to get omnistudio org permission
-    const omniStudioOrgPermissionEnabled: boolean = await this.isOmniStudioOrgPermissionEnabled(connection, namespace);
+  public static async getOrgDetails(connection: Connection, namespace: string): Promise<OmnistudioOrgDetails> {    
     // Query all installed packages and cast the result to InstalledPackage[]
     const allInstalledPackages = (await QueryTools.queryAll(
       connection,
@@ -293,6 +292,7 @@ export class OrgUtils {
       this.fields
     )) as unknown as InstalledPackage[];
 
+    let hasValidNamespace = true;
     const orgDetails = (await QueryTools.queryAll(
       connection,
       '',
@@ -300,20 +300,39 @@ export class OrgUtils {
       this.orgFields
     )) as unknown as OrgDetails;
 
-    const packageDetails: PackageDetail[] = allInstalledPackages
-      // Filter packages to only include those with a namespace in the predefined list
-      .filter((pkg) => this.namespaces.has(pkg.NamespacePrefix))
-      // Map the filtered packages to the required format: { version, namespace }
-      .map((pkg) => ({
-        version: `${pkg.MajorVersion}.${pkg.MinorVersion}`,
-        namespace: pkg.NamespacePrefix,
-      }));
+    let packageDetails: PackageDetail = {
+      version: '',
+      namespace: ''
+    };
 
+    for (const pkg of allInstalledPackages) {
+      if (namespace && namespace === pkg.NamespacePrefix) {
+        packageDetails.version = `${pkg.MajorVersion}.${pkg.MinorVersion}`;
+        packageDetails.namespace = pkg.NamespacePrefix;
+        break;
+      }
+    }
+
+    if (packageDetails.namespace === '') {
+      hasValidNamespace = false;
+      for (const pkg of allInstalledPackages) {
+        if ((namespace && namespace === pkg.NamespacePrefix) || this.namespaces.has(pkg.NamespacePrefix)) {
+          packageDetails.version = `${pkg.MajorVersion}.${pkg.MinorVersion}`;
+          packageDetails.namespace = pkg.NamespacePrefix;
+          break; // Exit loop after first match
+        }
+      }
+    }
+    
+    //Execute apex rest resource to get omnistudio org permission
+    const omniStudioOrgPermissionEnabled: boolean = await this.isOmniStudioOrgPermissionEnabled(connection, packageDetails.namespace);
+    
     return {
       packageDetails: packageDetails,
       omniStudioOrgPermissionEnabled: omniStudioOrgPermissionEnabled,
       orgDetails: orgDetails[0],
-      dataModel: omniStudioOrgPermissionEnabled ? this.standardDataModel : this.customDataModel
+      dataModel: omniStudioOrgPermissionEnabled ? this.standardDataModel : this.customDataModel,
+      hasValidNamespace: hasValidNamespace
     };
   }
 

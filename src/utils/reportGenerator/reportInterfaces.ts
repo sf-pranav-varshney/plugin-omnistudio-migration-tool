@@ -5,6 +5,7 @@ export interface TableColumn<T> {
   filterValue: any;
   title?: any;
   styles?: any;
+  icon?: any;
 }
 
 export interface Filter {
@@ -40,3 +41,10 @@ export interface TableHeaderCell {
   width?: string;
   styles?: string;
 }
+
+export type CTASummary = {
+  name: string, 
+  message: string, 
+  link: string
+}
+
