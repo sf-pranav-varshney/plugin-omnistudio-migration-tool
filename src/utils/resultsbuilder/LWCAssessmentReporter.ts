@@ -107,7 +107,7 @@ export class LWCAssessmentReporter {
     ];
 
     // Render table
-    const tableHtml = generateHtmlTable(headerColumn, columns, rows, org, filters, undefined, 'LWC Assessment');
+    const tableHtml = generateHtmlTable(headerColumn, columns, rows, org, filters, [], undefined, 'LWC Assessment');
     return `${tableHtml}`;
   }
 

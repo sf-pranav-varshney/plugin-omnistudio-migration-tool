@@ -1,8 +1,10 @@
+import { oldNew } from '../interfaces';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface TableColumn<T> {
   key: string;
   cell: (row: T) => string;
-  filterValue?: (row: T) => string | string[];
+  filterValue?: (row: T) => string | string[] | oldNew[];
   title?: (row: T) => string;
   styles?: (row: T) => string;
   icon?: (row: T) => string;

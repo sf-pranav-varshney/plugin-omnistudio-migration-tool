@@ -11,6 +11,7 @@ import { DebugTimer } from '../../../utils';
 import { Logger } from '../../../utils/logger';
 import OmnistudioRelatedObjectMigrationFacade from '../../../migration/related/OmnistudioRelatedObjectMigrationFacade';
 import { OmnistudioOrgDetails, OrgUtils } from '../../../utils/orgUtils';
+import { Constants } from '../../../utils/constants/stringContants';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/plugin-omnistudio-migration-tool', 'assess');
@@ -53,19 +54,16 @@ export default class Assess extends OmniStudioBaseCommand {
     const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, this.flags.namespace);
 
     if (!orgs.hasValidNamespace) {
-      this.ux.warn(
-        'The namespace you have passed is not valid namespace, the valid namespace of your org is ' +
-          orgs.packageDetails.namespace
-      );
+      this.ux.warn(messages.getMessage('invalidNamespace') + orgs.packageDetails.namespace);
     }
 
     if (!orgs.packageDetails) {
-      this.ux.error('No package installed on given org.');
+      this.ux.error(messages.getMessage('noPackageInstalled'));
       return;
     }
 
     if (orgs.omniStudioOrgPermissionEnabled) {
-      this.ux.error('The org is already on standard data model.');
+      this.ux.error(messages.getMessage('alreadyStandardModel'));
       return;
     }
 
@@ -87,10 +85,11 @@ export default class Assess extends OmniStudioBaseCommand {
     // Assess OmniStudio components
     await this.assessOmniStudioComponents(assesmentInfo, assessOnly, namespace, conn, allVersions);
 
+    let objectsToProcess: string[];
     // Assess related objects if specified
     if (relatedObjects) {
-      const validOptions = ['apex', 'lwc'];
-      const objectsToProcess = relatedObjects.split(',').map((obj) => obj.trim());
+      const validOptions = [Constants.Apex, Constants.LWC];
+      objectsToProcess = relatedObjects.split(',').map((obj) => obj.trim());
 
       // Validate input
       for (const obj of objectsToProcess) {
@@ -110,7 +109,7 @@ export default class Assess extends OmniStudioBaseCommand {
       assesmentInfo.apexAssessmentInfos = relatedObjectAssessmentResult.apexAssessmentInfos;
     }
 
-    await AssessmentReporter.generate(assesmentInfo, conn.instanceUrl, orgs);
+    await AssessmentReporter.generate(assesmentInfo, conn.instanceUrl, orgs, assessOnly, objectsToProcess);
     return assesmentInfo;
   }
 
@@ -132,16 +131,16 @@ export default class Assess extends OmniStudioBaseCommand {
     }
 
     switch (assessOnly) {
-      case 'dr':
+      case Constants.DataMapper:
         await this.assessDataRaptors(assesmentInfo, namespace, conn);
         break;
-      case 'fc':
+      case Constants.Flexcard:
         await this.assessFlexCards(assesmentInfo, namespace, conn, allVersions);
         break;
-      case 'os':
+      case Constants.Omniscript:
         await this.assessOmniScripts(assesmentInfo, namespace, conn, allVersions, OmniScriptExportType.OS);
         break;
-      case 'ip':
+      case Constants.IntegrationProcedure:
         await this.assessOmniScripts(assesmentInfo, namespace, conn, allVersions, OmniScriptExportType.IP);
         break;
       default:

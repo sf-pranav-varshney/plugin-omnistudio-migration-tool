@@ -104,6 +104,7 @@ export class ApexAssessmentReporter {
       apexAssessmentInfos,
       org,
       filters,
+      [],
       undefined,
       'Apex Assessment'
     );

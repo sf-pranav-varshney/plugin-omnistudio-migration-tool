@@ -148,10 +148,14 @@ export class OSAssessmentReporter {
     ];
 
     const filters: Filter[] = [
-      { label: 'Type', filterOptions: ['Angular', 'LWC'], key: 'type' },
+      {
+        label: 'Type',
+        filterOptions: Array.from(new Set(osAssessmentInfos.map((row: OSAssessmentInfo) => row.type))),
+        key: 'type',
+      },
       {
         label: 'Assessment Status',
-        filterOptions: ['Can be Automated', 'Need Manual Intervention'],
+        filterOptions: Array.from(new Set(osAssessmentInfos.map((row: OSAssessmentInfo) => row.migrationStatus))),
         key: 'assessmentStatus',
       },
     ];

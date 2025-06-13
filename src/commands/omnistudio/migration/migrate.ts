@@ -22,6 +22,7 @@ import { Logger } from '../../../utils/logger';
 import OmnistudioRelatedObjectMigrationFacade from '../../../migration/related/OmnistudioRelatedObjectMigrationFacade';
 import { generatePackageXml } from '../../../utils/generatePackageXml';
 import { OmnistudioOrgDetails, OrgUtils } from '../../../utils/orgUtils';
+import { Constants } from '../../../utils/constants/stringContants';
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -73,13 +74,17 @@ export default class Migrate extends OmniStudioBaseCommand {
 
     const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, namespace);
 
-    if (orgs.packageDetails.length === 0) {
-      this.ux.log('No package installed on given org.');
+    if (!orgs.hasValidNamespace) {
+      this.ux.warn(messages.getMessage('invalidNamespace') + orgs.packageDetails.namespace);
+    }
+
+    if (!orgs.packageDetails) {
+      this.ux.error(messages.getMessage('noPackageInstalled'));
       return;
     }
 
     if (orgs.omniStudioOrgPermissionEnabled) {
-      this.ux.log('The org is already on standard data model.');
+      this.ux.error(messages.getMessage('alreadyStandardModel'));
       return;
     }
 
@@ -89,7 +94,7 @@ export default class Migrate extends OmniStudioBaseCommand {
     let objectsToProcess: string[] = [];
     let targetApexNamespace: string;
     if (relatedObjects) {
-      const validOptions = ['apex', 'lwc'];
+      const validOptions = [Constants.Apex, Constants.LWC];
       objectsToProcess = relatedObjects.split(',').map((obj) => obj.trim());
       // Validate input
       for (const obj of objectsToProcess) {
@@ -206,7 +211,7 @@ export default class Migrate extends OmniStudioBaseCommand {
       ];
     } else {
       switch (migrateOnly) {
-        case 'os':
+        case Constants.Omniscript:
           migrationObjects.push(
             new OmniScriptMigrationTool(
               OmniScriptExportType.OS,
@@ -219,7 +224,7 @@ export default class Migrate extends OmniStudioBaseCommand {
             )
           );
           break;
-        case 'ip':
+        case Constants.IntegrationProcedure:
           migrationObjects.push(
             new OmniScriptMigrationTool(
               OmniScriptExportType.IP,
@@ -232,10 +237,10 @@ export default class Migrate extends OmniStudioBaseCommand {
             )
           );
           break;
-        case 'fc':
+        case Constants.Flexcard:
           migrationObjects.push(new CardMigrationTool(namespace, conn, this.logger, messages, this.ux, allVersions));
           break;
-        case 'dr':
+        case Constants.DataMapper:
           migrationObjects.push(new DataRaptorMigrationTool(namespace, conn, this.logger, messages, this.ux));
           break;
         default:
@@ -261,7 +266,7 @@ export default class Migrate extends OmniStudioBaseCommand {
   }
 
   private async getTargetApexNamespace(objectsToProcess: string[], targetApexNamespace: string): Promise<string> {
-    if (objectsToProcess.includes('apex')) {
+    if (objectsToProcess.includes(Constants.Apex)) {
       targetApexNamespace = await this.ux.prompt(
         'Enter the target namespace to be used for calling package Apex classes'
       );

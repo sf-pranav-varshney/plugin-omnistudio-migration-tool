@@ -6,6 +6,7 @@ import open from 'open';
 import { AssessmentInfo, FlexCardAssessmentInfo, nameLocation } from '../interfaces';
 import { ReportHeaderFormat } from '../reportGenerator/reportInterfaces';
 import { OmnistudioOrgDetails } from '../orgUtils';
+import { Constants } from '../constants/stringContants';
 import { OSAssessmentReporter } from './OSAssessmentReporter';
 import { LWCAssessmentReporter } from './LWCAssessmentReporter';
 import { ApexAssessmentReporter } from './ApexAssessmentReporter';
@@ -16,7 +17,9 @@ export class AssessmentReporter {
   public static async generate(
     result: AssessmentInfo,
     instanceUrl: string,
-    omnistudioOrgDetails: OmnistudioOrgDetails
+    omnistudioOrgDetails: OmnistudioOrgDetails,
+    assessOnly: string,
+    relatedObjects: string[]
   ): Promise<void> {
     const basePath = process.cwd() + '/assessment_reports';
     fs.mkdirSync(basePath, { recursive: true });
@@ -28,32 +31,80 @@ export class AssessmentReporter {
     const lwcAssessmentFilePath = basePath + '/lwc_assessment.html';
     const orgDetails: ReportHeaderFormat[] = this.formattedOrgDetails(omnistudioOrgDetails);
 
-    this.createDocument(
-      omniscriptAssessmentFilePath,
-      OSAssessmentReporter.generateOSAssesment(result.omniAssessmentInfo.osAssessmentInfos, instanceUrl, orgDetails)
-    );
-    this.createDocument(
-      flexcardAssessmentFilePath,
-      this.generateCardAssesment(result.flexCardAssessmentInfos, instanceUrl)
-    );
-    this.createDocument(
-      integrationProcedureAssessmentFilePath,
-      IPAssessmentReporter.generateIPAssesment(result.omniAssessmentInfo.ipAssessmentInfos, instanceUrl, orgDetails)
-    );
-    this.createDocument(
-      dataMapperAssessmentFilePath,
-      DRAssessmentReporter.generateDRAssesment(result.dataRaptorAssessmentInfos, instanceUrl, orgDetails)
-    );
+    if (!assessOnly) {
+      this.createDocument(
+        omniscriptAssessmentFilePath,
+        OSAssessmentReporter.generateOSAssesment(result.omniAssessmentInfo.osAssessmentInfos, instanceUrl, orgDetails)
+      );
 
-    this.createDocument(
-      apexAssessmentFilePath,
-      ApexAssessmentReporter.generateApexAssesment(result.apexAssessmentInfos, instanceUrl, orgDetails)
-    );
-    this.createDocument(
-      lwcAssessmentFilePath,
-      LWCAssessmentReporter.generateLwcAssesment(result.lwcAssessmentInfos, instanceUrl, orgDetails)
-    );
+      this.createDocument(
+        flexcardAssessmentFilePath,
+        this.generateCardAssesment(result.flexCardAssessmentInfos, instanceUrl)
+      );
 
+      this.createDocument(
+        integrationProcedureAssessmentFilePath,
+        IPAssessmentReporter.generateIPAssesment(result.omniAssessmentInfo.ipAssessmentInfos, instanceUrl, orgDetails)
+      );
+
+      this.createDocument(
+        dataMapperAssessmentFilePath,
+        DRAssessmentReporter.generateDRAssesment(result.dataRaptorAssessmentInfos, instanceUrl, orgDetails)
+      );
+    } else {
+      switch (assessOnly) {
+        case Constants.Omniscript:
+          this.createDocument(
+            omniscriptAssessmentFilePath,
+            OSAssessmentReporter.generateOSAssesment(
+              result.omniAssessmentInfo.osAssessmentInfos,
+              instanceUrl,
+              orgDetails
+            )
+          );
+          break;
+
+        case Constants.Flexcard:
+          this.createDocument(
+            flexcardAssessmentFilePath,
+            this.generateCardAssesment(result.flexCardAssessmentInfos, instanceUrl)
+          );
+          break;
+
+        case Constants.IntegrationProcedure:
+          this.createDocument(
+            integrationProcedureAssessmentFilePath,
+            IPAssessmentReporter.generateIPAssesment(
+              result.omniAssessmentInfo.ipAssessmentInfos,
+              instanceUrl,
+              orgDetails
+            )
+          );
+          break;
+
+        case Constants.DataMapper:
+          this.createDocument(
+            dataMapperAssessmentFilePath,
+            DRAssessmentReporter.generateDRAssesment(result.dataRaptorAssessmentInfos, instanceUrl, orgDetails)
+          );
+          break;
+
+        default:
+      }
+    }
+
+    if (relatedObjects && relatedObjects.includes(Constants.Apex)) {
+      this.createDocument(
+        apexAssessmentFilePath,
+        ApexAssessmentReporter.generateApexAssesment(result.apexAssessmentInfos, instanceUrl, orgDetails)
+      );
+    }
+    if (relatedObjects && relatedObjects.includes(Constants.LWC)) {
+      this.createDocument(
+        lwcAssessmentFilePath,
+        LWCAssessmentReporter.generateLwcAssesment(result.lwcAssessmentInfos, instanceUrl, orgDetails)
+      );
+    }
     const nameUrls = [
       {
         name: 'omnscript assessment report',

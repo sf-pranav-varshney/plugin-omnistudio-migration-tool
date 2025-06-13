@@ -109,9 +109,12 @@ export class DRAssessmentReporter {
       },
     ];
 
-    
     const filters: Filter[] = [
-      { label: 'Type', filterOptions: ['Extract', 'Load', 'Turbo Extract', 'Transform'], key: 'type' }
+      {
+        label: 'Type',
+        filterOptions: Array.from(new Set(dataRaptorAssessmentInfos.map((row: DataRaptorAssessmentInfo) => row.type))),
+        key: 'type',
+      },
     ];
     // Render table
     const tableHtml = generateHtmlTable(
