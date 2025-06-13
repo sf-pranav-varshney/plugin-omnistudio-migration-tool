@@ -156,15 +156,18 @@ export class OSAssessmentReporter {
       },
     ];
 
-    const ctaSummary: CTASummary[] = [{
-      name: 'Angular Omniscripts',
-      message: 'converts to LWC omniscripts',
-      link: 'https://google.com'
-    }, {
-      name: 'Duplicate Name',
-      message: 'rename the OS prior to running migration',
-      link: 'https://google.com'
-    }];
+    const ctaSummary: CTASummary[] = [
+      {
+        name: 'Angular Omniscripts',
+        message: 'converts to LWC omniscripts',
+        link: 'https://google.com',
+      },
+      {
+        name: 'Duplicate Name',
+        message: 'rename the OS prior to running migration',
+        link: 'https://google.com',
+      },
+    ];
 
     // Render table
     const tableHtml = generateHtmlTable(
@@ -185,9 +188,11 @@ export class OSAssessmentReporter {
   }
 
   private static getIconOnRow(assessmentStatus: string): string {
-    return assessmentStatus === 'Need Manual Intervention' ? `<span class='row-'><svg width="16" height="16" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="45" stroke="red" stroke-width="10" fill="none"/>
-      <line x1="25" y1="75" x2="75" y2="25" stroke="red" stroke-width="10"/>
-    </svg></span>` : ``;
+    return assessmentStatus === 'Need Manual Intervention'
+      ? `<span class='row-'><svg width='16' height='16' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
+      <circle cx='50' cy='50' r='45' stroke='red' stroke-width='10' fill='none'/>
+      <line x1='25' y1='75' x2='75' y2='25' stroke='red' stroke-width='10'/>
+    </svg></span>`
+      : '';
   }
 }

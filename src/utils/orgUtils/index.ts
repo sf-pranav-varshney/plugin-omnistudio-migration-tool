@@ -268,22 +268,21 @@ export class OrgUtils {
   // Define the object name for querying installed packages
   private static readonly objectName = 'Publisher';
 
-
   // Define the fields to retrieve from the Organization object
   private static readonly orgFields = ['Name'];
 
   // Define the object name for querying installed packages
   private static readonly orgObjectName = 'Organization';
 
-  private static readonly standardDataModel = "Standard";
-  private static readonly customDataModel = "Custom";
+  private static readonly standardDataModel = 'Standard';
+  private static readonly customDataModel = 'Custom';
   /**
    * Fetches package details (version and namespace) for specific installed packages.
    *
    * @param connection - Salesforce connection object
    * @returns Promise resolving to an array of PackageDetail objects
    */
-  public static async getOrgDetails(connection: Connection, namespace: string): Promise<OmnistudioOrgDetails> {    
+  public static async getOrgDetails(connection: Connection, namespace: string): Promise<OmnistudioOrgDetails> {
     // Query all installed packages and cast the result to InstalledPackage[]
     const allInstalledPackages = (await QueryTools.queryAll(
       connection,
@@ -302,7 +301,7 @@ export class OrgUtils {
 
     let packageDetails: PackageDetail = {
       version: '',
-      namespace: ''
+      namespace: '',
     };
 
     for (const pkg of allInstalledPackages) {
@@ -323,16 +322,19 @@ export class OrgUtils {
         }
       }
     }
-    
+
     //Execute apex rest resource to get omnistudio org permission
-    const omniStudioOrgPermissionEnabled: boolean = await this.isOmniStudioOrgPermissionEnabled(connection, packageDetails.namespace);
-    
+    const omniStudioOrgPermissionEnabled: boolean = await this.isOmniStudioOrgPermissionEnabled(
+      connection,
+      packageDetails.namespace
+    );
+
     return {
       packageDetails: packageDetails,
       omniStudioOrgPermissionEnabled: omniStudioOrgPermissionEnabled,
       orgDetails: orgDetails[0],
       dataModel: omniStudioOrgPermissionEnabled ? this.standardDataModel : this.customDataModel,
-      hasValidNamespace: hasValidNamespace
+      hasValidNamespace: hasValidNamespace,
     };
   }
 

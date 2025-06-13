@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface TableColumn<T> {
   key: string;
-  cell: any;
-  filterValue: any;
-  title?: any;
-  styles?: any;
-  icon?: any;
+  cell: (row: T) => string;
+  filterValue?: (row: T) => string | string[];
+  title?: (row: T) => string;
+  styles?: (row: T) => string;
+  icon?: (row: T) => string;
 }
 
 export interface Filter {
   label: string;
-  key: string;
   filterOptions: string[];
+  key: string;
 }
 
 export interface ReportHeader {
@@ -26,11 +26,11 @@ export interface ReportHeaderFormat {
 
 export interface HeaderColumn {
   label: string;
-  key?: string;
   colspan?: number;
   rowspan?: number;
+  key?: string;
   styles?: string;
-  subColumn?: HeaderColumn[]; // Recursive definition
+  subColumn: SubColumn[];
 }
 
 export interface TableHeaderCell {
@@ -43,8 +43,12 @@ export interface TableHeaderCell {
 }
 
 export type CTASummary = {
-  name: string, 
-  message: string, 
-  link: string
-}
+  name: string;
+  message: string;
+  link: string;
+};
 
+export interface SubColumn {
+  label: string;
+  key?: string;
+}

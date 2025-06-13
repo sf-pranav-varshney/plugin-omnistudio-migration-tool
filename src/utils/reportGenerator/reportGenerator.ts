@@ -1,16 +1,16 @@
 import { CTASummary, Filter, HeaderColumn, ReportHeader, TableColumn, TableHeaderCell } from './reportInterfaces';
 
 export function generateHtmlTable<T>(
-  headerRows: HeaderColumn[],
+  headerColumns: HeaderColumn[],
   columns: Array<TableColumn<T>>,
   rows: T[],
-  reportHeader: ReportHeader[],
+  orgDetails: ReportHeader[],
   filters: Filter[] = [],
   ctaSummary: CTASummary[] = [],
   tableClass = 'slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered',
   ariaLabel = ''
 ): string {
-  const transformedHeader: TableHeaderCell[][] = transform(headerRows);
+  const transformedHeader: TableHeaderCell[][] = transform(headerColumns);
 
   const thead = `
     <thead>
@@ -60,8 +60,9 @@ export function generateHtmlTable<T>(
         oninput="filterAndSearchTable()"
       />
     </div>
- 
-    <div class="filter-toggle-button" onclick="toggleFilterDropdown()">
+    ${
+      filters.length > 0
+        ? `<div class="filter-toggle-button" onclick="toggleFilterDropdown()">
       Filters
       <svg id="chevron-down" class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
         <path fill-rule="none" stroke="currentColor" stroke-width="2" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
@@ -69,7 +70,9 @@ export function generateHtmlTable<T>(
       <svg id="chevron-up" class="chevron-icon hidden" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
         <path fill-rule="none" stroke="currentColor" stroke-width="2" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
       </svg>
-    </div>
+    </div>`
+        : ''
+    }
   </div>
 
   <div id="filter-dropdown" class="filter-dropdown">
@@ -135,9 +138,9 @@ export function generateHtmlTable<T>(
     </tbody>
   `;
 
-  const pageHeader = `
+  const orgDetailSection = `
     <div class="header-container">
-      ${reportHeader
+      ${orgDetails
         .map(
           (header) => `
         <div class="org-details-section">
@@ -166,22 +169,22 @@ export function generateHtmlTable<T>(
   `;
 
   const ctaSumm = `
-  ${ ctaSummary
-    .map((cta) => `
+  ${ctaSummary
+    .map(
+      (cta) => `
       <ul class="slds-list_dotted">
         <li>${cta.name} - ${cta.message} <a target="_blank" href=${cta.link}>Learn more</a></li>
       </ul>
      `
-      ).join('')
-    }
+    )
+    .join('')}
   `;
 
   const reportPageHeading = `
     <div class="report-page-header">
       <div class="slds-text-heading_large"> ${ariaLabel} Report </div>
-      ${ctaButton}
-  </div>`
-
+      ${ctaSummary.length > 0 ? ctaButton : ''}
+  </div>`;
 
   return `
    <div class="report-wrapper">
@@ -189,7 +192,7 @@ export function generateHtmlTable<T>(
       <div class="table-summary-wrapper" id="main-panel">
         ${reportPageHeading}
         ${migrationBanner}
-        ${pageHeader}
+        ${orgDetailSection}
         ${filterAndSearchPanel}
         <div class="table-container">
           <table class="${tableClass}" aria-label="${ariaLabel}">
@@ -215,11 +218,11 @@ export function generateHtmlTable<T>(
   `;
 }
 
-function transform(columnInput): TableHeaderCell[][] {
-  const row1 = [];
-  const row2 = [];
+function transform(columnInput: HeaderColumn[]): TableHeaderCell[][] {
+  const row1: TableHeaderCell[] = [];
+  const row2: TableHeaderCell[] = [];
 
-  columnInput.forEach((item) => {
+  columnInput.forEach((item: HeaderColumn) => {
     if (item.subColumn && item.subColumn.length > 0) {
       row1.push({
         label: item.label,
@@ -245,4 +248,30 @@ function transform(columnInput): TableHeaderCell[][] {
   });
 
   return [row1, row2];
+}
+
+function generateOrgDetailsSection(orgDetails: ReportHeader[]): string {
+  if (!orgDetails || orgDetails.length === 0) {
+    return '';
+  }
+
+  const orgDetailsRows = orgDetails
+    .map(
+      (detail) => `
+    <tr>
+      <td><strong>${detail.key}</strong></td>
+      <td>${detail.value}</td>
+    </tr>
+  `
+    )
+    .join('');
+
+  return `
+    <div class="org-details-section">
+      <h3>Organization Details</h3>
+      <table class="org-details-table">
+        ${orgDetailsRows}
+      </table>
+    </div>
+  `;
 }

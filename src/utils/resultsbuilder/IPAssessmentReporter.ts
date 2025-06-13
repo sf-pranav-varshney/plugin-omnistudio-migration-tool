@@ -105,9 +105,10 @@ export class IPAssessmentReporter {
       ipAssessmentInfos,
       org,
       [],
+      [],
       undefined,
       'Integration Procedure Assessment'
     );
-    return `<div class="slds-text-heading_large">Integration Procedure Components Assessment</div>${tableHtml}`;
+    return `${tableHtml}`;
   }
 }

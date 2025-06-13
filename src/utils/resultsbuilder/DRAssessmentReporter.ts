@@ -109,7 +109,10 @@ export class DRAssessmentReporter {
       },
     ];
 
-    const filters: Filter[] = [];
+    
+    const filters: Filter[] = [
+      { label: 'Type', filterOptions: ['Extract', 'Load', 'Turbo Extract', 'Transform'], key: 'type' }
+    ];
     // Render table
     const tableHtml = generateHtmlTable(
       headerColumn,

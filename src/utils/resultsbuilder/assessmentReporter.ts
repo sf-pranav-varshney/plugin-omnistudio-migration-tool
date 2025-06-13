@@ -6,7 +6,6 @@ import open from 'open';
 import { AssessmentInfo, FlexCardAssessmentInfo, nameLocation } from '../interfaces';
 import { ReportHeaderFormat } from '../reportGenerator/reportInterfaces';
 import { OmnistudioOrgDetails } from '../orgUtils';
-import { Logger } from '../../utils/logger';
 import { OSAssessmentReporter } from './OSAssessmentReporter';
 import { LWCAssessmentReporter } from './LWCAssessmentReporter';
 import { ApexAssessmentReporter } from './ApexAssessmentReporter';
@@ -26,8 +25,7 @@ export class AssessmentReporter {
     const integrationProcedureAssessmentFilePath = basePath + '/integration_procedure_assessment.html';
     const dataMapperAssessmentFilePath = basePath + '/datamapper_assessment.html';
     const apexAssessmentFilePath = basePath + '/apex_assessment.html';
-    // TODO: Uncomment code once MVP for migration is completed
-    // const lwcAssessmentFilePath = basePath + '/lwc_assessment.html';
+    const lwcAssessmentFilePath = basePath + '/lwc_assessment.html';
     const orgDetails: ReportHeaderFormat[] = this.formattedOrgDetails(omnistudioOrgDetails);
 
     this.createDocument(
@@ -77,35 +75,40 @@ export class AssessmentReporter {
         name: 'Apex assessment report',
         location: 'apex_assessment.html',
       },
-      // TODO: Uncomment code once MVP for migration is completed
-      // {
-      //   name: 'LWC assessment report',
-      //   location: 'lwc_assessment.html',
-      // },
+      {
+        name: 'LWC assessment report',
+        location: 'lwc_assessment.html',
+      },
     ];
 
     await this.createMasterDocument(nameUrls, basePath);
-    await this.pushAssestUtilites('javascripts', basePath);
-    await this.pushAssestUtilites('styles', basePath);
+    this.pushAssestUtilites('javascripts', basePath);
+    this.pushAssestUtilites('styles', basePath);
   }
 
   private static formattedOrgDetails(orgDetails: OmnistudioOrgDetails): ReportHeaderFormat[] {
-    return [{
-      key: 'Org Name',
-      value: orgDetails.orgDetails.Name
-    }, {
-      key: 'Org Id',
-      value: orgDetails.orgDetails.Id,
-    }, {
-      key: 'Package Name',
-      value: orgDetails.packageDetails.namespace,
-    }, {
-      key: 'Data Model',
-      value: orgDetails.dataModel,
-    }, {
-      key: 'Assessment Date and Time',
-      value: new Date() as unknown as string
-    }]
+    return [
+      {
+        key: 'Org Name',
+        value: orgDetails.orgDetails.Name,
+      },
+      {
+        key: 'Org Id',
+        value: orgDetails.orgDetails.Id,
+      },
+      {
+        key: 'Package Name',
+        value: orgDetails.packageDetails.namespace,
+      },
+      {
+        key: 'Data Model',
+        value: orgDetails.dataModel,
+      },
+      {
+        key: 'Assessment Date and Time',
+        value: new Date() as unknown as string,
+      },
+    ];
   }
 
   /**
@@ -120,29 +123,29 @@ export class AssessmentReporter {
    * - Only `.js` and `.css` files are copied.
    * - The source files remain in place after copying.
    */
-  private static async pushAssestUtilites(folderName: string, destDir: string) {
+  private static pushAssestUtilites(folderName: string, destDir: string): void {
     const sourceDir = path.join(process.cwd(), 'src', folderName);
 
     if (!fs.existsSync(destDir)) {
-      this.ux.log(`Destination directory "${destDir}" does not exist. Skipping file copy.`);
+      // Destination directory does not exist. Skipping file copy.
       return;
     }
 
-    fs.readdir(sourceDir, (err, files) => {
-      if (err) {
-        this.ux.log('Error reading source directory:', err.message);
+    fs.readdir(sourceDir, (readDirErr, files) => {
+      if (readDirErr) {
+        // Error reading source directory: readDirErr.message
         return;
       }
 
-      files.forEach(file => {
+      files.forEach((file) => {
         const ext = path.extname(file);
         if (ext === '.js' || ext === '.css') {
           const srcPath = path.join(sourceDir, file);
           const destPath = path.join(destDir, file);
 
-          fs.copyFile(srcPath, destPath, err => {
-            if (err) {
-              this.ux.log(`Failed to copy "${file}":`, err.message);
+          fs.copyFile(srcPath, destPath, (copyErr) => {
+            if (copyErr) {
+              // Failed to copy file: copyErr.message
             }
           });
         }

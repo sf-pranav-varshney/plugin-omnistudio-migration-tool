@@ -1,0 +1,58 @@
+
+        <html>
+            <head>
+                <title>OmniStudio Migration Assessment</title>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.17.5/styles/salesforce-lightning-design-system.min.css" />
+            </head>
+            <body>
+            <div style="margin: 20px;">
+                    
+      <div style="margin-block:15px">        
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered" aria-label="Results for Apex updates">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="" scope="col" style="width: 25%">
+                    <div class="slds-truncate" title="Name">Name</div>
+                </th>
+                <th class="" scope="col" style="width: 10%">
+                    <div class="slds-truncate" title="File">File reference</div>
+                </th>
+                <th class="" scope="col" style="width: 10%">
+                    <div class="slds-truncate" title="Diff">Diff</div>
+                </th>
+                <th class="" scope="col" style="width: 10%">
+                    <div class="slds-truncate" title="Infos">Comments</div>
+                </th>
+                <th class="" scope="col" style="width: 10%">
+                    <div class="slds-truncate" title="Warnings">Errors</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <div class="slds-text-heading_large">Apex Assessment</div><tr class="slds-hint_parent">
+      <td><div class="slds-truncate" title="GetContentNoteAsStory">GetContentNoteAsStory</div></td>
+      <td><div class="slds-truncate" title="GetContentNoteAsStory"><a href="/Users/pranav.varshney/Documents/fork_migration/plugin-omnistudio-migration-tool/omnistudio_migration/force-app/main/default/classes/GetContentNoteAsStory.cls">GetContentNoteAsStory</div></td>
+      <td><div class="slds-truncate"><div style="color: red;">- Line 2: global with sharing class GetContentNoteAsStory implements vlocity_ins.VlocityOpenInterface2</div><div style="color: green;">+ Line 2: global with sharing class GetContentNoteAsStory implements Callable</div><div style="color: green;">+ Line 4:             public Object call(String action, Map&lt;String,Object> args)</div><div style="color: green;">+ Line 5:             {</div><div style="color: green;">+ Line 6:                 Map&lt;String,Object> inputMap = (Map&lt;String,Object>)args.get(&#039;input&#039;);</div><div style="color: green;">+ Line 7:                 Map&lt;String,Object> outMap = (Map&lt;String,Object>)args.get(&#039;output&#039;);</div><div style="color: green;">+ Line 8:                 Map&lt;String,Object> options = (Map&lt;String,Object>)args.get(&#039;options&#039;);</div><div style="color: green;">+ Line 9: </div><div style="color: green;">+ Line 10:                 return invokeMethod(action, inputMap, outMap, options);</div><div style="color: green;">+ Line 11:             }</div><div style="color: green;">+ Line 12:     </div></div></td>
+      <td><div class="slds-truncate"></div><li class="slds-item slds-text-color_destructive">File has been updated to allow remote calls from the Omnistudio components</li></td>
+      <td><div class="slds-truncate"></div></td>
+     </tr><tr class="slds-hint_parent">
+      <td><div class="slds-truncate" title="UserSecurityService">UserSecurityService</div></td>
+      <td><div class="slds-truncate" title="UserSecurityService"><a href="/Users/pranav.varshney/Documents/fork_migration/plugin-omnistudio-migration-tool/omnistudio_migration/force-app/main/default/classes/UserSecurityService.cls">UserSecurityService</div></td>
+      <td><div class="slds-truncate"><div style="color: red;">- Line 1: global with sharing class UserSecurityService implements vlocity_ins.VlocityOpenInterface2 </div><div style="color: green;">+ Line 1: global with sharing class UserSecurityService implements Callable </div><div style="color: green;">+ Line 3:             public Object call(String action, Map&lt;String,Object> args)</div><div style="color: green;">+ Line 4:             {</div><div style="color: green;">+ Line 5:                 Map&lt;String,Object> inputMap = (Map&lt;String,Object>)args.get(&#039;input&#039;);</div><div style="color: green;">+ Line 6:                 Map&lt;String,Object> outMap = (Map&lt;String,Object>)args.get(&#039;output&#039;);</div><div style="color: green;">+ Line 7:                 Map&lt;String,Object> options = (Map&lt;String,Object>)args.get(&#039;options&#039;);</div><div style="color: green;">+ Line 8: </div><div style="color: green;">+ Line 9:                 return invokeMethod(action, inputMap, outMap, options);</div><div style="color: green;">+ Line 10:             }</div><div style="color: green;">+ Line 11:     </div></div></td>
+      <td><div class="slds-truncate"></div><li class="slds-item slds-text-color_destructive">File has been updated to allow remote calls from the Omnistudio components</li></td>
+      <td><div class="slds-truncate"></div></td>
+     </tr><tr class="slds-hint_parent">
+      <td><div class="slds-truncate" title="UserSecurityService2">UserSecurityService2</div></td>
+      <td><div class="slds-truncate" title="UserSecurityService2"><a href="/Users/pranav.varshney/Documents/fork_migration/plugin-omnistudio-migration-tool/omnistudio_migration/force-app/main/default/classes/UserSecurityService2.cls">UserSecurityService2</div></td>
+      <td><div class="slds-truncate"><div style="color: red;">- Line 1: global with sharing class UserSecurityService2 implements vlocity_ins.VlocityOpenInterface2</div><div style="color: green;">+ Line 1: global with sharing class UserSecurityService2 implements Callable</div><div style="color: green;">+ Line 3:             public Object call(String action, Map&lt;String,Object> args)</div><div style="color: green;">+ Line 4:             {</div><div style="color: green;">+ Line 5:                 Map&lt;String,Object> inputMap = (Map&lt;String,Object>)args.get(&#039;input&#039;);</div><div style="color: green;">+ Line 6:                 Map&lt;String,Object> outMap = (Map&lt;String,Object>)args.get(&#039;output&#039;);</div><div style="color: green;">+ Line 7:                 Map&lt;String,Object> options = (Map&lt;String,Object>)args.get(&#039;options&#039;);</div><div style="color: green;">+ Line 8: </div><div style="color: green;">+ Line 9:                 return invokeMethod(action, inputMap, outMap, options);</div><div style="color: green;">+ Line 10:             }</div><div style="color: green;">+ Line 11:     </div></div></td>
+      <td><div class="slds-truncate"></div><li class="slds-item slds-text-color_destructive">File has been updated to allow remote calls from the Omnistudio components</li></td>
+      <td><div class="slds-truncate"></div></td>
+     </tr>
+        </tbody>
+        </table>
+      </div>
+                </div>
+            </div>
+            </body>
+        </html>
+        

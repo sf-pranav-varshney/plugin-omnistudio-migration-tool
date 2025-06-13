@@ -53,9 +53,12 @@ export default class Assess extends OmniStudioBaseCommand {
     const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, this.flags.namespace);
 
     if (!orgs.hasValidNamespace) {
-      this.ux.warn('The namespace you have passed is not valid namespace, the valid namespace of your org is ' + orgs.packageDetails.namespace)
+      this.ux.warn(
+        'The namespace you have passed is not valid namespace, the valid namespace of your org is ' +
+          orgs.packageDetails.namespace
+      );
     }
-    
+
     if (!orgs.packageDetails) {
       this.ux.error('No package installed on given org.');
       return;
