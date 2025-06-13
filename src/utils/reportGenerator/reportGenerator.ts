@@ -249,29 +249,3 @@ function transform(columnInput: HeaderColumn[]): TableHeaderCell[][] {
 
   return [row1, row2];
 }
-
-function generateOrgDetailsSection(orgDetails: ReportHeader[]): string {
-  if (!orgDetails || orgDetails.length === 0) {
-    return '';
-  }
-
-  const orgDetailsRows = orgDetails
-    .map(
-      (detail) => `
-    <tr>
-      <td><strong>${detail.key}</strong></td>
-      <td>${detail.value}</td>
-    </tr>
-  `
-    )
-    .join('');
-
-  return `
-    <div class="org-details-section">
-      <h3>Organization Details</h3>
-      <table class="org-details-table">
-        ${orgDetailsRows}
-      </table>
-    </div>
-  `;
-}

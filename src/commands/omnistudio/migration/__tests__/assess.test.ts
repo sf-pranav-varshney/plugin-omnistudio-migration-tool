@@ -20,18 +20,17 @@ describe('omnistudio:migration:assess', () => {
 
   // Mock org details
   const mockOrgDetailsStandardModel: OmnistudioOrgDetails = {
-    packageDetails: [
-      {
-        version: '1.0.0',
-        namespace: 'vlocity_ins',
-      },
-    ],
+    packageDetails: {
+      version: '1.0.0',
+      namespace: 'vlocity_ins',
+    },
     omniStudioOrgPermissionEnabled: false,
     orgDetails: {
       Name: 'Test Org',
       Id: '00D000000000001',
     },
     dataModel: 'Standard',
+    hasValidNamespace: true,
   };
 
   // Sample data for DataRaptor assessment
