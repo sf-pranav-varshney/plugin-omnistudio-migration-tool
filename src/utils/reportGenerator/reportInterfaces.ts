@@ -8,6 +8,8 @@ export interface TableColumn<T> {
   title?: (row: T) => string;
   styles?: (row: T) => string;
   icon?: (row: T) => string;
+  rowspan?: (arg0: T, arg1: number) => number;
+  skip?: (arg0: T, arg1: number) => boolean;
 }
 
 export interface Filter {
@@ -53,4 +55,13 @@ export type CTASummary = {
 export interface SubColumn {
   label: string;
   key?: string;
+}
+
+export interface ComponentDetail {
+  name: string;
+  title: string;
+  count: number;
+  complete?: number;
+  error?: number;
+  skip?: number;
 }
