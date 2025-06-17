@@ -1,20 +1,26 @@
-import { CTASummary, Filter, HeaderColumn, ReportHeader, TableColumn, TableHeaderCell } from './reportInterfaces';
-
+import {
+  CTASummary,
+  Filter,
+  HeaderColumn,
+  ReportFrameworkParameters,
+  ReportHeader,
+  TableColumn,
+  TableHeaderCell,
+} from './reportInterfaces';
 let reportTableInstance = 0;
 let dataItemInstance = 0;
 const dataItemClass = 'data-row-';
-export function generateHtmlTable<T>(
-  headerColumns: HeaderColumn[],
-  columns: Array<TableColumn<T>>,
-  rows: T[],
-  orgDetails: ReportHeader[],
-  filters: Filter[] = [],
-  ctaSummary: CTASummary[] = [],
-  tableClass = 'slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered',
-  ariaLabel = '',
-  indexedKey: string | undefined = undefined,
-  showMigrationBanner = true
-): string {
+export function generateHtmlTable<T>(reportFrameworkParameters: ReportFrameworkParameters<T>): string {
+  const headerColumns: HeaderColumn[] = reportFrameworkParameters.headerColumns;
+  const columns: Array<TableColumn<T>> = reportFrameworkParameters.columns;
+  const rows: T[] = reportFrameworkParameters.rows;
+  const orgDetails: ReportHeader[] = reportFrameworkParameters.orgDetails;
+  const filters: Filter[] = reportFrameworkParameters.filters || [];
+  const ctaSummary: CTASummary[] = reportFrameworkParameters.ctaSummary || [];
+  const tableClass = 'slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered';
+  const reportHeaderLabel: string = reportFrameworkParameters.reportHeaderLabel;
+  const indexedKey: string = reportFrameworkParameters.indexedKey;
+  const showMigrationBanner: boolean = reportFrameworkParameters.showMigrationBanner;
 
   const transformedHeader: TableHeaderCell[][] = transform(headerColumns);
   const tableId = `report-table-${reportTableInstance++}`;
@@ -192,8 +198,8 @@ export function generateHtmlTable<T>(
 
   const reportPageHeading = `
     <div class="report-page-header">
-      <div class="slds-text-heading_large"> ${ariaLabel} Report </div>
-      ${ctaSummary.length > 0 ? ctaButton : ''}
+      <div class="slds-text-heading_large"> ${reportHeaderLabel} Report </div>
+      ${ctaSummary && ctaSummary.length > 0 ? ctaButton : ''}
   </div>`;
 
   return `
@@ -205,7 +211,7 @@ export function generateHtmlTable<T>(
         ${orgDetailSection}
         ${filterAndSearchPanel}
         <div class="table-container">
-          <table class="${tableClass}" aria-label="${ariaLabel}">
+          <table class="${tableClass}" aria-label="${reportHeaderLabel}">
             ${thead}
             ${tbody}
           </table>
@@ -257,7 +263,6 @@ function transform(columnInput: HeaderColumn[]): TableHeaderCell[][] {
     }
   });
 
-
   if (row2.length === 0) {
     return [row1] as unknown as TableHeaderCell[][];
   }
@@ -267,7 +272,8 @@ function transform(columnInput: HeaderColumn[]): TableHeaderCell[][] {
 
 function createIndexedRow<T>(row: T, indexedKey: string, columns: Array<TableColumn<T>>): string {
   let rows = '';
-  const indexedTill = row[indexedKey].length;
+  const indexedValue = row[indexedKey] as { length: number };
+  const indexedTill = indexedValue.length;
   const dataRowClass = `${dataItemClass}${dataItemInstance++}`;
   for (let i = 0; i < indexedTill; i++) {
     rows += `

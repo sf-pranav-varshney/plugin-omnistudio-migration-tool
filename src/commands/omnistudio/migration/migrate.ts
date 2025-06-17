@@ -60,7 +60,6 @@ export default class Migrate extends OmniStudioBaseCommand {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async run(): Promise<any> {
-    const namespace = (this.flags.namespace || 'vlocity_ins') as string;
     const apiVersion = (this.flags.apiversion || '55.0') as string;
     const migrateOnly = (this.flags.only || '') as string;
     const allVersions = this.flags.allversions || false;
@@ -72,7 +71,7 @@ export default class Migrate extends OmniStudioBaseCommand {
     const conn = this.org.getConnection();
     conn.setApiVersion(apiVersion);
 
-    const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, namespace);
+    const orgs: OmnistudioOrgDetails = await OrgUtils.getOrgDetails(conn, this.flags.namespace);
 
     if (!orgs.hasValidNamespace) {
       this.ux.warn(messages.getMessage('invalidNamespace') + orgs.packageDetails.namespace);
@@ -88,6 +87,7 @@ export default class Migrate extends OmniStudioBaseCommand {
       return;
     }
 
+    const namespace = orgs.packageDetails.namespace;
     // Let's time every step
     DebugTimer.getInstance().start();
     let projectPath: string;

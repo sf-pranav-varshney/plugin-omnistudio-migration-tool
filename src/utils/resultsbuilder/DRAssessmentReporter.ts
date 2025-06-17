@@ -1,5 +1,11 @@
 import { DataRaptorAssessmentInfo } from '../interfaces';
-import { Filter, HeaderColumn, ReportHeaderFormat, TableColumn } from '../reportGenerator/reportInterfaces';
+import {
+  Filter,
+  HeaderColumn,
+  ReportFrameworkParameters,
+  ReportHeaderFormat,
+  TableColumn,
+} from '../reportGenerator/reportInterfaces';
 import { generateHtmlTable } from '../reportGenerator/reportGenerator';
 import { reportingHelper } from './reportingHelper';
 
@@ -116,17 +122,19 @@ export class DRAssessmentReporter {
         key: 'type',
       },
     ];
-    // Render table
-    const tableHtml = generateHtmlTable(
-      headerColumn,
+
+    const reportFrameworkParameters: ReportFrameworkParameters<DRAssessmentReporter> = {
+      headerColumns: headerColumn,
       columns,
-      dataRaptorAssessmentInfos,
-      org,
+      rows: dataRaptorAssessmentInfos,
+      orgDetails: org,
       filters,
-      [],
-      undefined,
-      'Data Mapper Assessment'
-    );
+      ctaSummary: [],
+      reportHeaderLabel: 'Data Mapper Assessment',
+      showMigrationBanner: true,
+    };
+    // Render table
+    const tableHtml = generateHtmlTable(reportFrameworkParameters);
     return `${tableHtml}`;
   }
 }

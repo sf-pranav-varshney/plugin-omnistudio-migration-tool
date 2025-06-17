@@ -1,6 +1,13 @@
 import { OSAssessmentInfo } from '../interfaces';
 import { generateHtmlTable } from '../reportGenerator/reportGenerator';
-import { CTASummary, Filter, HeaderColumn, ReportHeaderFormat, TableColumn } from '../reportGenerator/reportInterfaces';
+import {
+  CTASummary,
+  Filter,
+  HeaderColumn,
+  ReportFrameworkParameters,
+  ReportHeaderFormat,
+  TableColumn,
+} from '../reportGenerator/reportInterfaces';
 import { reportingHelper } from './reportingHelper';
 
 export class OSAssessmentReporter {
@@ -173,17 +180,19 @@ export class OSAssessmentReporter {
       },
     ];
 
-    // Render table
-    const tableHtml = generateHtmlTable(
-      headerColumn,
+    const reportFrameworkParameters: ReportFrameworkParameters<OSAssessmentInfo> = {
+      headerColumns: headerColumn,
       columns,
-      osAssessmentInfos,
-      org,
+      rows: osAssessmentInfos,
+      orgDetails: org,
       filters,
       ctaSummary,
-      undefined,
-      'Omniscript Assessment'
-    );
+      reportHeaderLabel: 'Omniscript Assessment',
+      showMigrationBanner: true,
+    };
+
+    // Render table
+    const tableHtml = generateHtmlTable(reportFrameworkParameters);
     return `${tableHtml}`;
   }
 
