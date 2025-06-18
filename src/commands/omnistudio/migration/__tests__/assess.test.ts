@@ -255,9 +255,10 @@ describe('omnistudio:migration:assess', () => {
       expect(dataRaptorContent).to.include('DR_Test_Extract');
       expect(dataRaptorContent).to.include('DR_Test_Transform');
 
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'))).to.be.false;
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'))).to.be.false;
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html')))
+        .to.be.false;
     });
 
   test
@@ -266,18 +267,18 @@ describe('omnistudio:migration:assess', () => {
     .stderr()
     .command(['omnistudio:migration:assess', '-o', Constants.Flexcard])
     .it('generates assessment files with content only for FlexCard components', () => {
-      
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/datamapper_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/datamapper_assessment.html'))).to.be.false;
 
       const flexCardContent = fs.readFileSync(
         path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'),
         'utf8'
       );
-      
+
       expect(flexCardContent).to.include('FC_Test_Card');
       expect(flexCardContent).to.include('FC_Test_Form');
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'))).to.be.false;
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html')))
+        .to.be.false;
     });
 
   test
@@ -286,9 +287,10 @@ describe('omnistudio:migration:assess', () => {
     .stderr()
     .command(['omnistudio:migration:assess', '-o', Constants.Omniscript])
     .it('generates assessment files with content only for OmniScript components', () => {
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/datamapper_assessment.html'))).to.be.false;
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'))).to.be.false;
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/datamapper_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html')))
+        .to.be.false;
 
       const omniScriptContent = fs.readFileSync(
         path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'),
@@ -303,10 +305,9 @@ describe('omnistudio:migration:assess', () => {
     .stderr()
     .command(['omnistudio:migration:assess', '-o', Constants.IntegrationProcedure])
     .it('generates assessment files with content only for Integration Procedure components', () => {
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/datamapper_assessment.html'))).to.be.false;
-
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'))).to.be.false;
-      void expect(fs.existsSync( path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/datamapper_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/flexcard_assessment.html'))).to.be.false;
+      void expect(fs.existsSync(path.join(process.cwd(), 'assessment_reports/omniscript_assessment.html'))).to.be.false;
 
       const ipContent = fs.readFileSync(
         path.join(process.cwd(), 'assessment_reports/integration_procedure_assessment.html'),
