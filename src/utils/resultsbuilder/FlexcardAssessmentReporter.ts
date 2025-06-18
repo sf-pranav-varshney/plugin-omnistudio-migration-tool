@@ -1,6 +1,11 @@
 import { FlexCardAssessmentInfo } from '../interfaces';
 import { generateHtmlTable } from '../reportGenerator/reportGenerator';
-import { HeaderColumn, ReportFrameworkParameters, ReportHeaderFormat, TableColumn } from '../reportGenerator/reportInterfaces';
+import {
+  HeaderColumn,
+  ReportFrameworkParameters,
+  ReportHeaderFormat,
+  TableColumn,
+} from '../reportGenerator/reportInterfaces';
 
 export class FlexcardAssessmentReporter {
   public static generateFlexcardAssesment(
@@ -99,7 +104,7 @@ export class FlexcardAssessmentReporter {
       reportHeaderLabel: 'Flexcard Components Assessment',
       showMigrationBanner: true,
     };
-        
+
     // Render table
     const tableHtml = generateHtmlTable(reportFrameworkParameters);
     return `${tableHtml}`;
