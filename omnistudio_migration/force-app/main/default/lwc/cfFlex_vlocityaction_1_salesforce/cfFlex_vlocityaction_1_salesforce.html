@@ -1,0 +1,73 @@
+<template>
+            <div class="slds-grid slds-wrap slds-is-relative ">
+            <div style="position: fixed;z-index: 999999;top: 0;right: 0;">
+  <vlocity_ins-toast class="flexcard-toast-element" theme="slds" title="" message="" styletype=""> </vlocity_ins-toast>
+</div>
+            <div if:true={showLoader} class="slds-is-absolute vloc-loader_override" style="height: 100%; width: 100%; min-height:50px; background: transparent; z-index: 99;">
+  <div>
+   <vlocity_ins-spinner
+      variant="brand"
+      alternative-text="Loading content..."
+      size="medium"
+      theme="slds"
+      ></vlocity_ins-spinner>
+  </div>
+</div>
+            <template if:false={hasPermission}>
+              You don't have required permissions to view this card.
+            </template>
+            <template if:true={hasPermission}>
+              <template if:true={hasRecords}>
+                        <template for:each={_records} for:item="record" for:index="rindex">
+                            <vlocity_ins-flex-card-state if:true={record}  key={record._flex.uniqueKey} data-recordid={record.Id} record={record} data-statue="true"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state0element0" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element0_child"  tracking-obj={_childCardTrackingObj}  class= "state0element0_child flexActionElement" 
+        data-action-element-class="state0element0_child" data-action-key="state0element0" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action0"   state-obj={record}  card={card}  record={record}  action-list='\[{"stateAction":{"id":"flex-action-1690220239330","type":"Vlocity Action","openUrlIn":"Current Window","name":"test"},"key":"1690220234659-xbkr1q1jx","label":"Action","draggable":false,"isOpen":true,"actionIndex":0,"sObjectType":""}]'  flyout-details='\{}'  theme="slds"  ></vlocity_ins-flex-action>
+      </div><div data-style-id="state0element1" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element1_child"  tracking-obj={_childCardTrackingObj}  class= "state0element1_child flexActionElement" 
+        data-action-element-class="state0element1_child" data-action-key="state0element1" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action1"   state-obj={record}  card={card}  record={record}  label="Test OS Invocation"  icon-name="icon-v-document1-line"  action-list='\[{"stateAction":{"id":"flex-action-1690547851666","type":"Vlocity Action","openUrlIn":"New Tab/Window","Attachments":"","ContentDocumentLinks":"","displayName":"Test OS Invocation","vlocityIcon":"icon-v-document1-line","name":"Test OS Invocation","fetchFromDS":false},"key":"1690220362182-cqsvu7l3k","label":"Action","draggable":true,"isOpen":true,"actionIndex":0,"contextId":"","sObjectType":""}]'  display-as-button="true"  button-variant="outline-brand"  flyout-details='\{}'  theme="slds"  ></vlocity_ins-flex-action>
+      </div><div data-style-id="state0element2" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element2_child"  tracking-obj={_childCardTrackingObj}  class= "state0element2_child flexActionElement" 
+        data-action-element-class="state0element2_child" data-action-key="state0element2" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action3"   state-obj={record}  card={card}  record={record}  label="Start Enrollment"  icon-name="icon-v-document1-line"  action-list='\[{"stateAction":{"id":"flex-action-1690224184692","type":"Vlocity Action","openUrlIn":"New Tab/Window","Attachments":"","ContentDocumentLinks":"","displayName":"Start Enrollment","vlocityIcon":"icon-v-document1-line","name":"Enrollment Action"},"key":"1690220362182-cqsvu7l3k","label":"Action","draggable":true,"isOpen":true,"actionIndex":0,"contextId":""}]'  display-as-button="true"  button-variant="outline-brand"  flyout-details='\{}'  aria-label="Enrollment quote"  theme="slds"  ></vlocity_ins-flex-action>
+      </div><div data-style-id="state0element3" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element3_child"  tracking-obj={_childCardTrackingObj}  class= "state0element3_child flexActionElement" 
+        data-action-element-class="state0element3_child" data-action-key="state0element3" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action2"   state-obj={record}  card={card}  record={record}  label="Navigate to Policy record"  icon-name="icon-v-troubleshoot"  action-list='\[{"stateAction":{"id":"flex-action-1690225588302","type":"Vlocity Action","openUrlIn":"Current Window","Attachments":"","ContentDocumentLinks":"","displayName":"Navigate to Policy record","vlocityIcon":"icon-v-troubleshoot","name":"Navigate to Policy record"},"key":"1690220362182-cqsvu7l3k","label":"Action","draggable":true,"isOpen":true,"actionIndex":0,"contextId":"0Q0Ws000000Ml7SKAG"}]'  display-as-button="true"  button-variant="outline-brand"  flyout-details='\{}'  aria-label="Navigate to quote"  theme="slds"  ></vlocity_ins-flex-action>
+      </div>
+        </div>
+      </vlocity_ins-flex-card-state>
+                        </template>
+                      </template>
+                      <template if:false={hasRecords}>
+                            <vlocity_ins-flex-card-state  record={record} data-statue="false"  data-index="0" data-rindex={rindex} class="cf-vlocity-state-0 cf-vlocity-state slds-size_12-of-12"  tracking-obj={_childCardTrackingObj} >
+      <div if:true={cardLoaded} class="slds-grid slds-wrap slds-card slds-p-around_x-small slds-m-bottom_x-small" style="">
+          <div data-style-id="state0element0" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element0_child"  tracking-obj={_childCardTrackingObj}  class= "state0element0_child flexActionElement" 
+        data-action-element-class="state0element0_child" data-action-key="state0element0" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action0"   state-obj={record}  card={card}  record={record}  action-list='\[{"stateAction":{"id":"flex-action-1690220239330","type":"Vlocity Action","openUrlIn":"Current Window","name":"test"},"key":"1690220234659-xbkr1q1jx","label":"Action","draggable":false,"isOpen":true,"actionIndex":0,"sObjectType":""}]'  flyout-details='\{}'  theme="slds"  ></vlocity_ins-flex-action>
+      </div><div data-style-id="state0element1" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element1_child"  tracking-obj={_childCardTrackingObj}  class= "state0element1_child flexActionElement" 
+        data-action-element-class="state0element1_child" data-action-key="state0element1" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action1"   state-obj={record}  card={card}  record={record}  label="Test OS Invocation"  icon-name="icon-v-document1-line"  action-list='\[{"stateAction":{"id":"flex-action-1690547851666","type":"Vlocity Action","openUrlIn":"New Tab/Window","Attachments":"","ContentDocumentLinks":"","displayName":"Test OS Invocation","vlocityIcon":"icon-v-document1-line","name":"Test OS Invocation","fetchFromDS":false},"key":"1690220362182-cqsvu7l3k","label":"Action","draggable":true,"isOpen":true,"actionIndex":0,"contextId":"","sObjectType":""}]'  display-as-button="true"  button-variant="outline-brand"  flyout-details='\{}'  theme="slds"  ></vlocity_ins-flex-action>
+      </div><div data-style-id="state0element2" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element2_child"  tracking-obj={_childCardTrackingObj}  class= "state0element2_child flexActionElement" 
+        data-action-element-class="state0element2_child" data-action-key="state0element2" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action3"   state-obj={record}  card={card}  record={record}  label="Start Enrollment"  icon-name="icon-v-document1-line"  action-list='\[{"stateAction":{"id":"flex-action-1690224184692","type":"Vlocity Action","openUrlIn":"New Tab/Window","Attachments":"","ContentDocumentLinks":"","displayName":"Start Enrollment","vlocityIcon":"icon-v-document1-line","name":"Enrollment Action"},"key":"1690220362182-cqsvu7l3k","label":"Action","draggable":true,"isOpen":true,"actionIndex":0,"contextId":""}]'  display-as-button="true"  button-variant="outline-brand"  flyout-details='\{}'  aria-label="Enrollment quote"  theme="slds"  ></vlocity_ins-flex-action>
+      </div><div data-style-id="state0element3" class="slds-col   slds-size_12-of-12 " data-rindex={rindex} style="" ><vlocity_ins-flex-action data-style-id="state0element3_child"  tracking-obj={_childCardTrackingObj}  class= "state0element3_child flexActionElement" 
+        data-action-element-class="state0element3_child" data-action-key="state0element3" onexecuteaction={performAction} data-show-spinner="false"
+        data-element-label="action2"   state-obj={record}  card={card}  record={record}  label="Navigate to Policy record"  icon-name="icon-v-troubleshoot"  action-list='\[{"stateAction":{"id":"flex-action-1690225588302","type":"Vlocity Action","openUrlIn":"Current Window","Attachments":"","ContentDocumentLinks":"","displayName":"Navigate to Policy record","vlocityIcon":"icon-v-troubleshoot","name":"Navigate to Policy record"},"key":"1690220362182-cqsvu7l3k","label":"Action","draggable":true,"isOpen":true,"actionIndex":0,"contextId":"0Q0Ws000000Ml7SKAG"}]'  display-as-button="true"  button-variant="outline-brand"  flyout-details='\{}'  aria-label="Navigate to quote"  theme="slds"  ></vlocity_ins-flex-action>
+      </div>
+        </div>
+      </vlocity_ins-flex-card-state>
+                      </template>
+            </template>
+            <template if:true={hasError}>
+            {error}
+            </template>
+            
+      <vlocity_ins-action action-wrapperclass="slds-hide" re-render-flyout class="action-trigger slds-col" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction} onfireactionevent={actionEvtHandler}>
+      
+      </vlocity_ins-action>
+  
+            <vlocity_ins-action class="execute-action" re-render-flyout action-wrapperclass="slds-hide" onupdateos={updateOmniscript} onselectcards={updateSelectedCards} onsetvalue={updateAction} onfireactionevent={actionEvtHandler}>
+            
+            </vlocity_ins-action>
+            </div>
+          </template>

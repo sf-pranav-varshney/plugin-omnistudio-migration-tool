@@ -1,0 +1,15 @@
+<template>
+  <div class={themeClass}>
+    <c-modal class={promptClass} extra-header-class={headerClass} extra-footer-class={footerClass} size="large" theme={theme}>
+      <div slot="header">
+        <h1 class={headerTxtClass} id="prompt-heading-id">{title}</h1>
+      </div>
+      <div slot="content">
+        <p>{message}</p>
+      </div>
+      <div slot="footer">
+        <c-button theme={theme} variant="neutral" onclick={closePrompt} label="Okay"></c-button>
+      </div>
+    </c-modal>
+  </div>
+</template>

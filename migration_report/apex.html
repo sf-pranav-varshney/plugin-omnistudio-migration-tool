@@ -1,0 +1,181 @@
+<html><head><title>Apex Classes Migration Result Migration Report</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.17.5/styles/salesforce-lightning-design-system.min.css" />
+      <link rel="stylesheet" href="reportGenerator.css" />
+    </head><body><div class="slds-m-around_medium"><div class="slds-text-heading_large">Apex Classes Migration Result</div>
+   <div class="report-wrapper">
+    <div id="scrollable-wrapper" class="scrollable-wrapper">
+      <div class="table-summary-wrapper rpt-table-container" id="report-table-3">
+        
+    <div class="report-page-header">
+      <div class="slds-text-heading_large"> Apex Classes Migration Result Migration Report </div>
+      
+  </div>
+        
+        
+    <div class="header-container">
+      
+        <div class="org-details-section">
+          <div class="label-key">Org Name</div>
+          <div class="label-value">EPIC OrgFarm</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Org Id</div>
+          <div class="label-value">00DSB00000JKY2b2AH</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Namespace</div>
+          <div class="label-value">vlocity_cmt</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Data Model</div>
+          <div class="label-value">Custom</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Assessment Date and Time</div>
+          <div class="label-value">Tue Jun 17 2025 15:30:22 GMT+0530 (India Standard Time)</div>
+        </div>
+      
+    </div>
+  
+        
+  <div class="filter-dropdown-container">
+  <div class="filter-header-bar">
+    <!-- Row count display -->
+    <div class="row-count-display" id="row-count">
+      Showing 0 records
+    </div>
+
+    <!-- Search and filter controls -->
+    <div class="search-container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="black" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      </svg>
+      <input
+        type="text"
+        id="name-search-input"
+        class="search-input"
+        placeholder="Search by Name"
+        oninput="filterAndSearchTable('report-table-3')"
+      />
+    </div>
+    <div class="filter-toggle-button" onclick="toggleFilterDropdown('report-table-3')">
+      Filters
+      <svg id="chevron-down" class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="none" stroke="currentColor" stroke-width="2" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+      </svg>
+      <svg id="chevron-up" class="chevron-icon hidden" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="none" stroke="currentColor" stroke-width="2" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+      </svg>
+    </div>
+  </div>
+
+  <div id="filter-dropdown" class="filter-dropdown">
+    
+      <div class="filter-group">
+        <div class="filter-group-label">Filter by Errors</div>
+        <div class="filter-options">
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="warnings"
+                value="Has Errors"
+                checked
+                onclick="filterAndSearchTable('report-table-3')"
+              />
+              Has Errors
+            </label>
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="warnings"
+                value="Has No Errors"
+                checked
+                onclick="filterAndSearchTable('report-table-3')"
+              />
+              Has No Errors
+            </label>
+          
+        </div>
+      </div>
+    
+  </div>
+</div>
+        <div class="table-container">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered" aria-label="Apex Classes Migration Result Migration">
+            
+    <thead>
+      
+        <tr>
+          
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Class Name</span>
+                  </div>
+                </th>
+              
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">File Reference</span>
+                  </div>
+                </th>
+              
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Diff</span>
+                  </div>
+                </th>
+              
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Comments</span>
+                  </div>
+                </th>
+              
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Errors</span>
+                  </div>
+                </th>
+              
+        </tr>
+      
+    </thead>
+  
+            
+    <tbody id="filterable-table-body">
+      
+        <tr id="no-rows-message" style="display: none;">
+          <td colspan="100%" style="text-align: center; padding: 16px; color: #666;">
+            No matching records found.
+          </td>
+        </tr>
+    </tbody>
+  
+          </table>
+        </div>
+      </div>
+      <div id="cta-summary-panel" class="cta-summary-panel hidden">
+        <div class="cta-header">
+          <div class="cta-header-label">Call to Action Summary</div> 
+          <div class="close-icon" onclick="toggleCtaSummaryPanel()">
+            <svg width="16px" height="16px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.056"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z" fill="#0F1729"></path> </g></svg>
+          </div>
+        </div>
+        <div class="line-separator"></div>
+        
+  
+  
+      </div>
+    </div>
+    <script src="./reportGeneratorUtility.js" defer></script>
+    <link rel="stylesheet" href="./reportGenerator.css">
+  </div>
+  </div></body></html>

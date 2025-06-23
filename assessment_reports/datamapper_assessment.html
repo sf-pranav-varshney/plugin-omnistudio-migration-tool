@@ -1,0 +1,314 @@
+
+        <html>
+            <head>
+                <title>OmniStudio Migration Assessment</title>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.17.5/styles/salesforce-lightning-design-system.min.css" />
+            </head>
+            <body>
+            <div style="margin: 20px;">
+                    
+   <div class="report-wrapper">
+    <div id="scrollable-wrapper" class="scrollable-wrapper">
+      <div class="table-summary-wrapper rpt-table-container" id="report-table-4">
+        
+    <div class="report-page-header">
+      <div class="slds-text-heading_large"> Data Mapper Assessment Report </div>
+      
+  </div>
+        
+    <div class="migration-message">
+      <svg fill="#8c4c00" width="20px" height="20px" viewBox="-3.2 -3.2 38.40 38.40" xmlns="http://www.w3.org/2000/svg" stroke="#8c4c00" stroke-width="0.0032">
+        <path d="M31.082 27.5l-13.999-24.249c-0.237-0.352-0.633-0.58-1.083-0.58s-0.846 0.228-1.080 0.575l-0.003 0.005-14 24.249c-0.105 0.179-0.167 0.395-0.167 0.625 0 0.69 0.56 1.25 1.25 1.25h28c0.69 0 1.249-0.56 1.249-1.25 0-0.23-0.062-0.446-0.171-0.631zM4.165 26.875l11.835-20.499 11.834 20.499zM14.75 12v8.994c0 0.69 0.56 1.25 1.25 1.25s1.25-0.56 1.25-1.25V12c0-0.69-0.56-1.25-1.25-1.25s-1.25 0.56-1.25 1.25zM15.12 23.619c-0.124 0.106-0.22 0.24-0.278 0.394-0.051 0.143-0.08 0.308-0.08 0.48s0.029 0.337 0.083 0.491c0.144 0.3 0.38 0.536 0.671 0.676 0.143 0.051 0.308 0.080 0.48 0.080s0.337-0.029 0.49-0.083c0.156-0.071 0.288-0.166 0.4-0.281 0.224-0.225 0.363-0.536 0.363-0.878 0-0.687-0.557-1.244-1.244-1.244-0.343 0-0.653 0.139-0.878 0.363z"/>
+      </svg>
+      <span>High level description of what actions were taken as part of the migration will come here</span>
+    </div>
+  
+        
+    <div class="header-container">
+      
+        <div class="org-details-section">
+          <div class="label-key">Org Name</div>
+          <div class="label-value">EPIC OrgFarm</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Org Id</div>
+          <div class="label-value">00DSB00000JKY2b2AH</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Package Name</div>
+          <div class="label-value">vlocity_cmt</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Data Model</div>
+          <div class="label-value">Custom</div>
+        </div>
+      
+        <div class="org-details-section">
+          <div class="label-key">Assessment Date and Time</div>
+          <div class="label-value">Wed Jun 18 2025 14:29:47 GMT+0530 (India Standard Time)</div>
+        </div>
+      
+    </div>
+  
+        
+  <div class="filter-dropdown-container">
+  <div class="filter-header-bar">
+    <!-- Row count display -->
+    <div class="row-count-display" id="row-count">
+      Showing 13 records
+    </div>
+
+    <!-- Search and filter controls -->
+    <div class="search-container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="black" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      </svg>
+      <input
+        type="text"
+        id="name-search-input"
+        class="search-input"
+        placeholder="Search by Name"
+        oninput="filterAndSearchTable('report-table-4')"
+      />
+    </div>
+    <div class="filter-toggle-button" onclick="toggleFilterDropdown('report-table-4')">
+      Filters
+      <svg id="chevron-down" class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="none" stroke="currentColor" stroke-width="2" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+      </svg>
+      <svg id="chevron-up" class="chevron-icon hidden" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="none" stroke="currentColor" stroke-width="2" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+      </svg>
+    </div>
+  </div>
+
+  <div id="filter-dropdown" class="filter-dropdown">
+    
+      <div class="filter-group">
+        <div class="filter-group-label">Filter by Type</div>
+        <div class="filter-options">
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="type"
+                value=""
+                checked
+                onclick="filterAndSearchTable('report-table-4')"
+              />
+              
+            </label>
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="type"
+                value="Extract"
+                checked
+                onclick="filterAndSearchTable('report-table-4')"
+              />
+              Extract
+            </label>
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="type"
+                value="Transform"
+                checked
+                onclick="filterAndSearchTable('report-table-4')"
+              />
+              Transform
+            </label>
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="type"
+                value="Turbo Extract"
+                checked
+                onclick="filterAndSearchTable('report-table-4')"
+              />
+              Turbo Extract
+            </label>
+          
+            <label>
+              <input
+                type="checkbox"
+                class="filter-checkbox"
+                data-filter-key="type"
+                value="Load"
+                checked
+                onclick="filterAndSearchTable('report-table-4')"
+              />
+              Load
+            </label>
+          
+        </div>
+      </div>
+    
+  </div>
+</div>
+        <div class="table-container">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-table_col-bordered" aria-label="Data Mapper Assessment">
+            
+    <thead>
+      
+        <tr>
+          
+                <th colspan="2"  style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">In Package</span>
+                  </div>
+                </th>
+              
+                <th colspan="1"  style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">In Core</span>
+                  </div>
+                </th>
+              
+                <th  rowspan="2" style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Type</span>
+                  </div>
+                </th>
+              
+                <th  rowspan="2" style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Summary</span>
+                  </div>
+                </th>
+              
+                <th  rowspan="2" style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Custom Function Changes</span>
+                  </div>
+                </th>
+              
+                <th  rowspan="2" style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Apex Dependencies</span>
+                  </div>
+                </th>
+              
+        </tr>
+      
+        <tr>
+          
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Name</span>
+                  </div>
+                </th>
+              
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Record ID</span>
+                  </div>
+                </th>
+              
+                <th   style="width:auto;">
+                  <div class="filter-header">
+                    <span class="filter-label">Name</span>
+                  </div>
+                </th>
+              
+        </tr>
+      
+    </thead>
+  
+            
+    <tbody id="filterable-table-body">
+      
+        <tr class="data-row-24">
+          <td data-name="billing import bundle" title="Billing Import Bundle" key="oldName" value="Billing Import Bundle" style=""> Billing Import Bundle</td><td  title="a1jSB00000WPrbqYAD" key="id" value="a1jSB00000WPrbqYAD" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000WPrbqYAD">a1jSB00000WPrbqYAD</a></td><td data-name="billingimportbundle" title="BillingImportBundle" key="name" value="BillingImportBundle" style=""> BillingImportBundle</td><td  title="" key="type" value="" style=""> </td><td  title=" name will be changed from Billing Import Bundle to BillingImportBundle" key="summary" value=" name will be changed from Billing Import Bundle to BillingImportBundle" style=""> <ul class="slds-list_dotted"><li class="slds-item" title=" name will be changed from Billing Import Bundle to BillingImportBundle"> name will be changed from Billing Import Bundle to BillingImportBundle</li></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-25">
+          <td data-name="duplicatenamedm" title="DuplicateNameDM" key="oldName" value="DuplicateNameDM" style=""> DuplicateNameDM</td><td  title="a1jSB00000WcdsLYAR" key="id" value="a1jSB00000WcdsLYAR" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000WcdsLYAR">a1jSB00000WcdsLYAR</a></td><td data-name="duplicatenamedm" title="DuplicateNameDM" key="name" value="DuplicateNameDM" style=""> DuplicateNameDM</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="[object Object]" style=""> <ul class="slds-list_dotted"><li class="slds-item" title=" Formula will change REPLACE(%accounts:Name%, ' ', '+') to FUNCTION('DRString','replace',%accounts:Name%, ' ', '+')"> Formula will change REPLACE(%accounts:Name%, ' ', '+') to FUNCTION('DRString','replace',%accounts:Name%, ' ', '+')</li></td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-26">
+          <td data-name="duplicatenamedm1" title="DuplicateNameDM1" key="oldName" value="DuplicateNameDM1" style=""> DuplicateNameDM1</td><td  title="a1jSB00000WcfULYAZ" key="id" value="a1jSB00000WcfULYAZ" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000WcfULYAZ">a1jSB00000WcfULYAZ</a></td><td data-name="duplicatenamedm1" title="DuplicateNameDM1" key="name" value="DuplicateNameDM1" style=""> DuplicateNameDM1</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-27">
+          <td data-name="migrationtransformcustomfunction" title="MigrationTransformCustomFunction" key="oldName" value="MigrationTransformCustomFunction" style=""> MigrationTransformCustomFunction</td><td  title="a1jSB00000XFPRJYA5" key="id" value="a1jSB00000XFPRJYA5" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPRJYA5">a1jSB00000XFPRJYA5</a></td><td data-name="migrationtransformcustomfunction" title="MigrationTransformCustomFunction" key="name" value="MigrationTransformCustomFunction" style=""> MigrationTransformCustomFunction</td><td  title="Transform" key="type" value="Transform" style=""> Transform</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-28">
+          <td data-name="migrationtransformpackageapexclass" title="MigrationTransformPackageApexClass" key="oldName" value="MigrationTransformPackageApexClass" style=""> MigrationTransformPackageApexClass</td><td  title="a1jSB00000XFPRKYA5" key="id" value="a1jSB00000XFPRKYA5" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPRKYA5">a1jSB00000XFPRKYA5</a></td><td data-name="migrationtransformpackageapexclass" title="MigrationTransformPackageApexClass" key="name" value="MigrationTransformPackageApexClass" style=""> MigrationTransformPackageApexClass</td><td  title="Transform" key="type" value="Transform" style=""> Transform</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-29">
+          <td data-name="prefillscenario" title="PrefillScenario" key="oldName" value="PrefillScenario" style=""> PrefillScenario</td><td  title="a1jSB00000XFPRLYA5" key="id" value="a1jSB00000XFPRLYA5" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPRLYA5">a1jSB00000XFPRLYA5</a></td><td data-name="prefillscenario" title="PrefillScenario" key="name" value="PrefillScenario" style=""> PrefillScenario</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-30">
+          <td data-name="datamappertransformwithxmlresponse" title="DataMapperTransformWithXMLResponse" key="oldName" value="DataMapperTransformWithXMLResponse" style=""> DataMapperTransformWithXMLResponse</td><td  title="a1jSB00000XFPSvYAP" key="id" value="a1jSB00000XFPSvYAP" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPSvYAP">a1jSB00000XFPSvYAP</a></td><td data-name="datamappertransformwithxmlresponse" title="DataMapperTransformWithXMLResponse" key="name" value="DataMapperTransformWithXMLResponse" style=""> DataMapperTransformWithXMLResponse</td><td  title="Transform" key="type" value="Transform" style=""> Transform</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-31">
+          <td data-name="datamapperturboextract" title="DataMapperTurboExtract" key="oldName" value="DataMapperTurboExtract" style=""> DataMapperTurboExtract</td><td  title="a1jSB00000XFPSwYAP" key="id" value="a1jSB00000XFPSwYAP" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPSwYAP">a1jSB00000XFPSwYAP</a></td><td data-name="datamapperturboextract" title="DataMapperTurboExtract" key="name" value="DataMapperTurboExtract" style=""> DataMapperTurboExtract</td><td  title="Turbo Extract" key="type" value="Turbo Extract" style=""> Turbo Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-32">
+          <td data-name="getaccountrecordtypename" title="GetAccountRecordTypeName" key="oldName" value="GetAccountRecordTypeName" style=""> GetAccountRecordTypeName</td><td  title="a1jSB00000XFPSxYAP" key="id" value="a1jSB00000XFPSxYAP" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPSxYAP">a1jSB00000XFPSxYAP</a></td><td data-name="getaccountrecordtypename" title="GetAccountRecordTypeName" key="name" value="GetAccountRecordTypeName" style=""> GetAccountRecordTypeName</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-33">
+          <td data-name="migrationcustomfunction" title="MigrationCustomFunction" key="oldName" value="MigrationCustomFunction" style=""> MigrationCustomFunction</td><td  title="a1jSB00000XFPSyYAP" key="id" value="a1jSB00000XFPSyYAP" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPSyYAP">a1jSB00000XFPSyYAP</a></td><td data-name="migrationcustomfunction" title="MigrationCustomFunction" key="name" value="MigrationCustomFunction" style=""> MigrationCustomFunction</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-34">
+          <td data-name="drgetaccountrecordtypename" title="DRGetAccountRecordTypeName" key="oldName" value="DRGetAccountRecordTypeName" style=""> DRGetAccountRecordTypeName</td><td  title="a1jSB00000XFPUXYA5" key="id" value="a1jSB00000XFPUXYA5" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPUXYA5">a1jSB00000XFPUXYA5</a></td><td data-name="drgetaccountrecordtypename" title="DRGetAccountRecordTypeName" key="name" value="DRGetAccountRecordTypeName" style=""> DRGetAccountRecordTypeName</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-35">
+          <td data-name="datamapperextract" title="DataMapperExtract" key="oldName" value="DataMapperExtract" style=""> DataMapperExtract</td><td  title="a1jSB00000XFPUYYA5" key="id" value="a1jSB00000XFPUYYA5" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPUYYA5">a1jSB00000XFPUYYA5</a></td><td data-name="datamapperextract" title="DataMapperExtract" key="name" value="DataMapperExtract" style=""> DataMapperExtract</td><td  title="Extract" key="type" value="Extract" style=""> Extract</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr class="data-row-36">
+          <td data-name="datamapperload" title="DataMapperLoad" key="oldName" value="DataMapperLoad" style=""> DataMapperLoad</td><td  title="a1jSB00000XFPUZYA5" key="id" value="a1jSB00000XFPUZYA5" style=""> <a href="https://orgfarm-399c2c5c3a.test1.my.pc-rnd.salesforce.com/a1jSB00000XFPUZYA5">a1jSB00000XFPUZYA5</a></td><td data-name="datamapperload" title="DataMapperLoad" key="name" value="DataMapperLoad" style=""> DataMapperLoad</td><td  title="Load" key="type" value="Load" style=""> Load</td><td  title="" key="summary" value="" style=""> <ul class="slds-list_dotted"></ul></td><td  title="" key="customFunctionChanges" value="" style=""> </td><td  title="" key="apexDependencies" value="" style=""> <ul class="slds-list_dotted"></ul></td>
+        </tr>
+      
+        <tr id="no-rows-message" style="display: none;">
+          <td colspan="100%" style="text-align: center; padding: 16px; color: #666;">
+            No matching records found.
+          </td>
+        </tr>
+    </tbody>
+  
+          </table>
+        </div>
+      </div>
+      <div id="cta-summary-panel" class="cta-summary-panel hidden">
+        <div class="cta-header">
+          <div class="cta-header-label">Call to Action Summary</div> 
+          <div class="close-icon" onclick="toggleCtaSummaryPanel()">
+            <svg width="16px" height="16px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.056"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z" fill="#0F1729"></path> </g></svg>
+          </div>
+        </div>
+        <div class="line-separator"></div>
+        
+  
+  
+      </div>
+    </div>
+    <script src="./reportGeneratorUtility.js" defer></script>
+    <link rel="stylesheet" href="./reportGenerator.css">
+  </div>
+  
+                </div>
+            </div>
+            </body>
+        </html>
+        
