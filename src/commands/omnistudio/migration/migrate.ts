@@ -104,7 +104,7 @@ export default class Migrate extends OmniStudioBaseCommand {
       }
       // Ask for user consent
       const consent = await this.ux.confirm(
-        'By proceeding further, you hereby consent to the use, accept changes to your custom code, and the accompanying terms and conditions associated with the use of the OmniStudio Migration Tool. Do you want to proceed? [y/n]'
+        'By proceeding further, you hereby consent to the use, accept changes to your custom code, and the accompanying terms and conditions associated with the use of the OmniStudio Migration Assistant. Do you want to proceed? [y/n]'
       );
       if (!consent) {
         this.ux.error(`User declined consent, will not process ${relatedObjects} .`);
@@ -254,7 +254,7 @@ export default class Migrate extends OmniStudioBaseCommand {
   private async getProjectPath(relatedObjects: string, projectPath: string): Promise<string> {
     const projectPathConfirmation = await this.ux
       .confirm(`Do you have a sfdc project where ${relatedObjects} files are already retrieved from org - y
-          or you want tool to create a project omnistudio_migration in current directory for processing - n ? [y/n]`);
+          or you want assistant to create a project omnistudio_migration in current directory for processing - n ? [y/n]`);
     if (projectPathConfirmation) {
       projectPath = await this.ux.prompt(`Enter the project path for processing ${relatedObjects} :`);
       const projectJsonFile = 'sfdx-project.json';
