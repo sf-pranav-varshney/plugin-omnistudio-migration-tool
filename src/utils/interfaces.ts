@@ -96,6 +96,7 @@ export interface FlexCardAssessmentInfo {
   dependenciesIP: string[];
   dependenciesDR: string[];
   dependenciesOS: string[];
+  dependenciesLWC: string[];
   infos: string[];
   warnings: string[];
 }
@@ -143,4 +144,24 @@ export interface nameLocation {
 export interface oldNew {
   old: string;
   new: string;
+}
+
+export interface OmniStudioSettingsMetadata {
+  fullName: string;
+  disableRollbackFlagsPref: boolean;
+}
+
+export interface QueryResult {
+  DeveloperName: string;
+  Value: string;
+  totalSize: number;
+  done: boolean;
+  records: Array<{
+    attributes: {
+      type: string;
+      url: string;
+    };
+    DeveloperName: string;
+    Value: string;
+  }>;
 }
